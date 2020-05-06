@@ -1,4 +1,8 @@
-# Oracle Cloud Infrastructure (OCI) 
+# Oracle Cloud Infrastructure (OCI)
+
+Development and deployment platforms can be created on Oracle Cloud Infrastructure. Development platform is a Compute Node using Cloud Developer Image, having some development packages and tools pre-installed. Deployment is performed on a Docker Container running in Container Cluster (OKE). Also Oracle Cluster Infrastructure Registry (OCIR) is used to store the Docker Image resulted from the automated build, and used for the deployment. Application data is store inside Oracle Database Cloud Service, running on a Database System, and using Multitenant Architecture for consolidation and resource optimization.
+
+In this lab we will create all the required components on OCI.
 
 ## Generate SSH keys
 
@@ -90,8 +94,6 @@ JlqG6nM3TEMfWLIvW2RFFFXtmBD5dBaqe3fWIZ8u+mP2XUdQc7T/YUx4y2gvga7BrbguyB
 ````
 >**Note** : Use these keys as examples, and for training purpose only. It is highly recommended to create your own SSH keys for your development environments.
 
-# OCI components
-
 ## Login to Oracle Cloud Infrastructure
 
 Oracle cloud console URL: [https://console.eu-frankfurt-1.oraclecloud.com](https://console.eu-frankfurt-1.oraclecloud.com)
@@ -111,7 +113,7 @@ Select **VCN with Internet Connectivity**. Start VCN Wizard.
 
 Next. Create.
 
-## Subnet
+### Subnet
 
 When complete, under Networking > **Virtual Cloud Networks**. Click **[Your Initials]-VCN** for details. Click **Create Subnet**.
 
