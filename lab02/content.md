@@ -1,10 +1,14 @@
 # GitHub repository
 
+## Introduction
+
+For this workshop we will use GitHub as a central code repository and version control system.
+
 Navigate to [https://github.com](https://github.com/) and create an account.
 
 Fork [vltabacaru/orcl-ws-cicd](https://github.com/vltabacaru/orcl-ws-cicd) project in your account. It creates a copy of this repository in your account [Your Username]/orcl-ws-cicd. In your repository, click on **Clone or download**, and copy the URL in your notes text file. It looks like https://github.com/[Your Username]/orcl-ws-cicd.git.
 
-# Remote Desktop vs. Command Line
+## Remote Desktop vs. Command Line
 
 Get the Public IP address of the Compute Instance from Oracle Cloud console, and save it in your notes text file.
 
@@ -63,7 +67,7 @@ sudo ./xRDP_config.sh
 
 When completed, this script installs and configures Remote Desktop on your Compute Instance for user **oracle** with password **WelcomePTS#2019**.
 
-# OCI CLI and Kubectl
+## OCI CLI and Kubectl
 
 **OCI CLI** is already installed on our development Compute Instance, we can check the version.
 
@@ -100,7 +104,7 @@ sudo yum install -y kubectl
 
 Now OCI CLI and Kubectl are installed.
 
-# Git
+## Git
 
 GitHub uses Git version control systems (VCS) to handle the collaboration workflow. This allows developers to create a local copy of the project, makes changes, and merge them back into the central repository.
 
@@ -139,7 +143,7 @@ sudo bash -c 'source /etc/bashrc'
 cd ~
 ````
 
-### Important: All exercises for this workshop have to be executed as **oracle** user.
+>**Important Note** : All exercises for this workshop have to be executed as **oracle** user.
 
 You have two options, use the command line and **vim** editor, or use the Remote Desktop connection and **gedit** editor. 
 

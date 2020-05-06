@@ -1,6 +1,12 @@
 # Deploy Python microservice on OKE
 
-At this point we have all the components we need to deploy our Python microservice application to OKE cluster on Oracle Cloud. This requires a new pipeline definition in **wercker.yml** file. We will call it **deploy**. Add this section at the end of your wercker.yml file (leave a blank line between build section and deploy section):
+## Introduction
+
+At this point we have all the components we need to deploy our Python microservice application to OKE cluster on Oracle Cloud. This requires a new pipeline definition in **wercker.yml** file. We will call it **deploy**. 
+
+## Add Deploy to Wercker Pipeline
+
+Add this section at the end of your wercker.yml file (leave a blank line between build section and deploy section):
 
 ````
 deploy:
@@ -64,6 +70,8 @@ deploy:
 ...
 ````
 
+## Deploy Pipeline
+
 We need to add the second pipeline to Wercker **Workflows** using the console. Click **Add New Pipeline** button.
 
 - Name: deploy
@@ -125,6 +133,8 @@ NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
 kubernetes-bootcamp   1/1     1            1           11m
 orcl-ws-app           1/1     1            1           3m34s
 ````
+
+## Run Web Service
 
 Open Kubernetes Dashboard, login using the token, and check the deployment on Overview under **Deployments**. Go down on the page, and view our Python microservice under **Services**, **orcl-ws-app**. Copy the IP address of this microservice under External endpoints, [orcl-ws-app-IP]. 
 

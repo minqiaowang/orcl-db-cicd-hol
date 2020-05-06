@@ -1,5 +1,7 @@
 # Oracle Cloud Infrastructure (OCI)
 
+## Introduction
+
 Development and deployment platforms can be created on Oracle Cloud Infrastructure. Development platform is a Compute Node using Cloud Developer Image, having some development packages and tools pre-installed. Deployment is performed on a Docker Container running in Container Cluster (OKE). Also Oracle Cluster Infrastructure Registry (OCIR) is used to store the Docker Image resulted from the automated build, and used for the deployment. Application data is store inside Oracle Database Cloud Service, running on a Database System, and using Multitenant Architecture for consolidation and resource optimization.
 
 In this lab we will create all the required components on OCI.

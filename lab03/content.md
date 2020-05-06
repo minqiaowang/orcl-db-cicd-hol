@@ -1,6 +1,14 @@
 # Wercker
 
-Open [https://app.wercker.com](https://app.wercker.com) and login with your GitHub account. Click the **+** sign next to profile icon 👤 on upper right corner, and **Add Application**.
+## Introduction
+
+Wercker is the CI server we will use in this workshop. Wercker empowers organizations and their development teams to achieve continuous integration and continuous delivery (CI/CD) goals with micro-services and Docker.
+
+Open [https://app.wercker.com](https://app.wercker.com) and login with your GitHub account. 
+
+## Add Application
+
+Click the **+** sign next to profile icon 👤 on upper right corner, and **Add Application**.
 
 - Select SCM: GutHub
 - Select Repository: [Your Username]/orcl-ws-cicd
@@ -8,7 +16,11 @@ Open [https://app.wercker.com](https://app.wercker.com) and login with your GitH
 
 Create.
 
-Wercker uses a **wercker.yml** file to define the Steps required to execute automation tasks for your application, along with the Pipelines that group them. Create a wercker.yml file.
+Wercker uses a **wercker.yml** file to define the Steps required to execute automation tasks for your application, along with the Pipelines that group them. 
+
+## Wercker.YML
+
+Create a wercker.yml file.
 
 ````
 gedit wercker.yml
@@ -98,7 +110,7 @@ git push
 
 Review the build results on Wercker console. If you followed this guide, the build is successful.
 
-# Create Web Service
+## Create Web Service
 
 We want our application to be used as a web service, available online. For this purpose we will use [Bottle](https://bottlepy.org), a Web Server Gateway Interface (WSGI) micro web-framework for the Python programming language. It is designed to be fast, simple and lightweight, and is distributed as a single file module with no dependencies other than the Python Standard Library. 
 
@@ -276,7 +288,7 @@ git push
 
 Verify this build is successful. We are still not covering all functions with a unit test, but this is fine for now, you get the idea.
 
-# Test web service locally
+## Test Web Service Locally
 
 We can test the web service Python application locally on the development machine. In order to use the browser from our computer, we need another port forwarding tunnel added to our SSH connection. This requires to close our current connection, and reconnect.
 
@@ -304,7 +316,7 @@ Reconnect to the development machine. This is the SSH connection command for Mac
 ssh -C -i id_rsa -L 3389:localhost:3389 -L 8080:localhost:8080 -L 8001:localhost:8001 opc@[Compute Public IP]
 ````
 
-#### Important: Our project is developed in a Python virtual environment **orclvenv**, as **oracle** user, in folder **/home/oracle/orcl-ws-cicd**. Every time you connect to the development machine, you need to run these commands so you can continue working on this application.
+>**Important Note** : Our project is developed in a Python virtual environment **orclvenv**, as **oracle** user, in folder **/home/oracle/orcl-ws-cicd**. Every time you connect to the development machine, you need to run these commands so you can continue working on this application.
 
 ````
 sudo su - oracle

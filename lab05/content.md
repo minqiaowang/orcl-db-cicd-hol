@@ -1,6 +1,10 @@
 # Push Docker image to Registry (OCIR)
 
+## Introduction
+
 Before we can deploy our application with a CI/CD pipeline in Wercker, we need to push the image to a Docker repository. We will use the repository on Registry (OCIR) we created on Oracle Cloud, called [Your Initials]rep (small case, e.g. vltrep).
+
+## Define Wercker Variables
 
 In Wercker, we need to define three environment variables, in the **Environment** tab. Enter the name of the variable in Key field, the value in Value, set Protected or not, and click **Add**.
 
@@ -40,6 +44,8 @@ DB_HOST
 DB_SERVICE
 
 - pdb01.sub[Number].[Your Initials]vcn.oraclevcn.com
+
+## Launch Web Service on Docker
 
 We create a very small linux bash script that will start our web service application on the Docker container when deployed.
 
@@ -132,6 +138,8 @@ git push
 ````
 
 Verify the build is successful on Wercker console. Open Oracle Cloud console. Click on hamburger menu ≡, then Developer Services > **Registry (OCIR)**. Click on the repository called [Your Initials]rep. It has a Docker image with Size: 543.77 MB. This is not important, just wanted to show where your build is stored.
+
+## OCI CLI and Kubectl
 
 Now we can use this build for the deploy pipeline. The deployment is performed on the Container Cluster (OKE) called [Your Initials]cluster we created. This cluster uses Kubernetes, and we need to install **kubectl** on our development environment.
 
@@ -240,6 +248,8 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 ````
 
 Write in your notes text file the value of this token, just the sting, without [token:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] in front of it. This is the value of OKE_TOKEN.
+
+## Kubernetes Dashboard
 
 Launch Kubernetes Dashboard on your development environment, and give it a few minutes to start.
 

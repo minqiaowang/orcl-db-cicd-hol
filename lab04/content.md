@@ -1,6 +1,14 @@
 # Oracle Database
 
-We want our micro service to our Oracle Database and calculate a promotion or a salary for the employees in Human Resources (HR) sample schema. Connect to the DB System you created on OCI, called [Your Initials]-DB. 
+## Introduction
+
+Our Python application stores data in an Oracle Database, that runs as a Database Cloud Service on a Database System, and uses Multitenant Architecture.
+
+We want our micro service to our Oracle Database and calculate a promotion or a salary for the employees in Human Resources (HR) sample schema. 
+
+## Get Database Host and Service
+
+Connect to the DB System you created on OCI, called [Your Initials]-DB. 
 
 ````
 ssh -C -i ~/orcl-ws-cicd/keys/id_rsa opc@[DB System Public IP]
@@ -72,7 +80,7 @@ JOB_HISTORY
 7 rows selected.
 ````
 
-# Python on Oracle Database
+## Python on Oracle Database
 
 Back on our development environment, let's connect our Python microservice to our Oracle Database. This enhancement requires [cx_Oracle](https://oracle.github.io/python-cx_Oracle/) extension module.
 
@@ -258,6 +266,8 @@ Commit and push the changes to the master branch on code repository.
 git commit -a -m "Add database connection unit test"
 git push
 ````
+
+## Oracle Instant Client on Docker
 
 We have [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client.html) installed on the development machine, but not on the build environment. Remember, our development environment is the Compute Instance on OCI with **Oracle Linux Server 7.7**, based on Cloud Developer Image. Our build, and future deployment environment, is a Docker image with **Debian GNU/Linux 10 (buster)** with Python 3, we get from Docker Hub, called **python:3.7**.
 
