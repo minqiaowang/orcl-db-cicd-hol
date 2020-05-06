@@ -17,7 +17,7 @@ Ideally, most of the CI/CD chain, called CI/CD pipeline, is automated. Organizat
 
 ## Access the Labs Using Our Web Interface
 
-**[Click here](https://oracle.github.io/learning-library/developer-library/orcl-db-cicd-hol/index.html)** to use our easy to navigate HTML format.
+**[Click here](https://vltabacaru.github.io/orcl-db-cicd-hol/?lab=introduction)** to use our easy to navigate HTML format.
 
 ## Access the Labs on the Repo
 
