@@ -1,0 +1,52 @@
+{
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Continuous Integration / Continuous Delivery with Oracle Database",
+            "publisheddate": "04/01/2020",
+            "filename": "../../introduction/content.md"
+        },
+        {
+            "title": "Lab 1: OCI",
+            "description": "OCI",
+            "publisheddate": "04/01/2020",
+            "filename": "../../lab01/content.md"
+        },
+        {
+            "title": "Lab 2: GitHub",
+            "description": "GitHub",
+            "publisheddate": "04/01/2020",
+            "filename": "../../lab02/content.md"
+        },
+        {
+            "title": "Lab 3: Wercker",
+            "description": "Wercker",
+            "publisheddate": "04/01/2020",
+            "filename": "../../lab03/content.md"
+        },
+        {
+            "title": "Lab 4: cx_Oracle",
+            "description": "cx_Oracle",
+            "publisheddate": "04/01/2020",
+            "filename": "../../lab04/content.md"
+        },
+        {
+            "title": "Lab 5: OCIR",
+            "description": "OCIR",
+            "publisheddate": "04/01/2020",
+            "filename": "../../lab05/content.md"
+        },
+        {
+            "title": "Lab 6: Deploy",
+            "description": "Deploy",
+            "publisheddate": "04/01/2020",
+            "filename": "../../lab06/content.md"
+        },
+        {
+            "title": "Lab 7: Liquibase",
+            "description": "Liquibase",
+            "publisheddate": "04/01/2020",
+            "filename": "../../lab07/content.md"
+        }
+    ]
+}
