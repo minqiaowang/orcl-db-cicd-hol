@@ -1,4 +1,4 @@
-# Apply CI/CD principles to Oracle Database
+# Oracle Database Changes in CI/CD Workflow
 
 ## Introduction
 
@@ -60,7 +60,7 @@ While working on database only, we don't need the Python virtual environment act
 . ./orclvenv/bin/activate
 ````
 
-## Liquibase First Run
+## Liquibase Basic Training
 
 Before using Liquibase in development, it is a good idea to test it and see how it works. Create a test folder.
 

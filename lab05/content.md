@@ -1,4 +1,4 @@
-# Push Docker image to Registry (OCIR)
+# Push Docker Image to Registry (OCIR)
 
 ## Introduction
 
@@ -8,18 +8,18 @@ Before we can deploy our application with a CI/CD pipeline in Wercker, we need t
 
 In Wercker, we need to define three environment variables, in the **Environment** tab. Enter the name of the variable in Key field, the value in Value, set Protected or not, and click **Add**.
 
-DOCKER_USERNAME
+**DOCKER_USERNAME**
 
 - format [cloud_tenant]/[cloud_username]
 - e.g. ocitenantexp/scott.tiger@example.com
 
-DOCKER_PASSWORD
+**DOCKER_PASSWORD**
 
 - Generated Auth Token on Oracle Cloud 
 - }dFhRabc023dfEa7e4:4
 - Protected
 
-DOCKER_REPO
+**DOCKER_REPO**
 
 - format [region].ocir.io/[cloud_tenant]/[registry_OCIR]
 - e.g. eu-frankfurt-1.ocir.io/ocitenantexp/vltrep
@@ -28,20 +28,20 @@ All three variables must have a Delete button on the right side.
 
 Now, the database connection details are hardcoded in our application. These details may change, so it is a good idea to add them as environment variables. Add these four variables in Wercker:
 
-DB_USER
+**DB_USER**
 
 - hr
 
-DB_PASSWORD
+**DB_PASSWORD**
 
 - WelCom3#2020_
 - Protected
 
-DB_HOST
+**DB_HOST**
 
 - [Your Initials]-host.sub[Number].[Your Initials]vcn.oraclevcn.com
 
-DB_SERVICE
+**DB_SERVICE**
 
 - pdb01.sub[Number].[Your Initials]vcn.oraclevcn.com
 
@@ -139,9 +139,9 @@ git push
 
 Verify the build is successful on Wercker console. Open Oracle Cloud console. Click on hamburger menu ≡, then Developer Services > **Registry (OCIR)**. Click on the repository called [Your Initials]rep. It has a Docker image with Size: 543.77 MB. This is not important, just wanted to show where your build is stored.
 
-## OCI CLI and Kubectl
+## OCI CLI and Kubectl Configuration
 
-Now we can use this build for the deploy pipeline. The deployment is performed on the Container Cluster (OKE) called [Your Initials]cluster we created. This cluster uses Kubernetes, and we need to install **kubectl** on our development environment.
+Now we can use this build for the deploy pipeline. The deployment is performed on the Container Cluster (OKE) called [Your Initials]cluster we created. This cluster uses Kubernetes, and we need to configure **kubectl** on our development environment.
 
 On Oracle Cloud console Click on hamburger menu ≡, then Developer Services > **Container Clusters (OKE)**. Click [Your Initials]cluster and **Access Cluster**. Click **Local Access**. We need to follow these steps to configure kubectl, and some more steps to create a missing folder and a config file.
 
@@ -212,6 +212,8 @@ Write in your notes text file the value of OKE_IMAGESECRET: ocirsecret.
 
 On Oracle Cloud console, navigate to hamburger menu ≡, then Developer Services > **Container Clusters (OKE)**. Click [Your Initials]cluster, and copy the value of **Kubernetes Address**. This is the value of OKE_MASTER, write it in your notes text file, adding 'https://' in front of it, if it doesn't start with.
 
+## Kubernetes Dashboard
+
 Next step is to define an OKE administrator service account and a cluster role binding, both called oke-admin. For the definition we can use a YML file, **oke-admin-service-account.yaml**, already cloned from GitHub. This is the definition:
 
 ````
@@ -249,8 +251,6 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 Write in your notes text file the value of this token, just the sting, without [token:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] in front of it. This is the value of OKE_TOKEN.
 
-## Kubernetes Dashboard
-
 Launch Kubernetes Dashboard on your development environment, and give it a few minutes to start.
 
 ````
@@ -261,16 +261,16 @@ Starting to serve on 127.0.0.1:8001
 
 Hit Enter to get back control of the compute instance. Now we have the three variables required for the deployment. Add these three variables in Wercker:
 
-OKE_IMAGESECRET
+**OKE_IMAGESECRET**
 
 - ocirsecret
 
-OKE_MASTER
+**OKE_MASTER**
 
 - looks line a URL or IP address and a port number
 - e.g. https://123.123.123.123\:6443 or https://some-name.eu-fra-1.clst.oci.orclcld.com:6443
 
-OKE_TOKEN
+**OKE_TOKEN**
 
 - [about-10-rows-long-string]
 - Protected

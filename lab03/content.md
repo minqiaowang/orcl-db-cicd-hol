@@ -1,8 +1,8 @@
-# Wercker
+# Oracle Wercker CI Service
 
 ## Introduction
 
-Wercker is the CI server we will use in this workshop. Wercker empowers organizations and their development teams to achieve continuous integration and continuous delivery (CI/CD) goals with micro-services and Docker.
+Wercker is the CI service we will use in this workshop. Wercker empowers organizations and their development teams to achieve continuous integration and continuous delivery (CI/CD) goals with micro-services and Docker.
 
 Open [https://app.wercker.com](https://app.wercker.com) and login with your GitHub account. 
 
@@ -65,7 +65,7 @@ Wercker automates the buid, and as soon as we commit our changes to the central 
 
 You can review the build on Wercker console under [Your Username]/orcl-ws-cicd > **Runs**. Click on the **build** pipeline to see all the steps. Click on **run tests** step to see the execution details. You should see the same results as when the pytest tool was executed locally on the development machine.
 
-## Change the code
+## Change the Code
 
 Next step is to add a new feature to the application. We will first add a unit test without writing the function. Writing a failing test first and then adding the code to pass the test is called Test Driven Development (TDD). Add the following code to the end of **test_promotion.py**:
 

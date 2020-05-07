@@ -1,10 +1,10 @@
-# Deploy Python microservice on OKE
+# Deploy Python App on Container Cluster (OKE)
 
 ## Introduction
 
 At this point we have all the components we need to deploy our Python microservice application to OKE cluster on Oracle Cloud. This requires a new pipeline definition in **wercker.yml** file. We will call it **deploy**. 
 
-## Add Deploy to Wercker Pipeline
+## Add Pipeline to Wercker.YML
 
 Add this section at the end of your wercker.yml file (leave a blank line between build section and deploy section):
 

@@ -1,10 +1,10 @@
 # Continuous Integration / Delivery / Deployment (CI/CD) pipeline for Python microservice web application on Oracle Database
 
-In order to accelerate the cycles of development and delivery of solutions to customers, many organizations are adopting Agile, Continuous Integration, Delivery, and Deployment, and DevOps. Even though these are different sets of methodologies, principles and practices, they support one another. In this workshop we’ll explain how Oracle Cloud Infrastructure can help you adopt and improve the implementation of Continuous Integration and Delivery, but first let's clear up some of the key concepts.
+In order to accelerate the cycles of software solutions development and delivery to customers, many organizations are adopting Agile, Continuous Integration/Delivery/Deployment, and DevOps principles, practices and methodologies. Even though these are different sets of guidelines, they support one another. In this workshop we’ll explain how Oracle Cloud Infrastructure can help you adopt and improve the implementation of Continuous Integration/Delivery/Deployment in your organization, but first let's clear up some of the key concepts.
 
-**Continuous Integration (CI)** refers to the practice of frequently merging new software using a single line of code we call master branch. **Continuous Delivery (CD)** refers to the release of packaged software, modules, or features in frequent cycles. Likewise, **Continuous Deployment (CD)** refers to the deployment these software packages/modules/features to a production platform in frequent cycles.
+**Continuous Integration (CI)** refers to the practice of frequently merging new software using a single line of code we call master branch. **Continuous Delivery (CD)** refers to the release of packaged software, modules, or features in frequent cycles. Likewise, **Continuous Deployment (CD)** refers to the deployment of these software packages/modules/features to a production (or pre-production) platform in frequent cycles.
 
-Ideally, most of the CI/CD chain, called CI/CD pipeline, is automated. Organizations that have a completely automated CI/CD pipeline in place achieve faster response cycle on code changes. Once code has been merged and deployed, it is available for testing and verification, leading to accelerated DevOps cycles. Problems can be found earlier and working software can be delivered to customers faster.
+Ideally, most of the CI/CD chain (workflow or pipeline) is automated. Organizations that have a completely automated CI/CD pipeline in place achieve faster response cycle on code changes. Once code has been merged and deployed, it is available for testing and verification, leading to accelerated DevOps cycles. Problems can be found earlier, and working software can be delivered to customers faster.
 
 ## Workshop Requirements
 
@@ -24,13 +24,13 @@ Ideally, most of the CI/CD chain, called CI/CD pipeline, is automated. Organizat
 Alternatively, you can follow the labs on this repo :
 
 - [Introduction](./introduction/content.md)
-- [OCI](./lab01/content.md)
-- [GitHub](./lab02/content.md)
-- [Wercker](./lab03/content.md)
-- [cx_Oracle](./lab04/content.md)
-- [OCIR](./lab05/content.md)
-- [Deploy](./lab06/content.md)
-- [Liquibase](./lab07/content.md)
+- [Oracle Cloud Infrastructure (OCI)](./lab01/content.md)
+- [GitHub Code Repository](./lab02/content.md)
+- [Oracle Wercker CI Service](./lab03/content.md)
+- [Oracle Database for Python](./lab04/content.md)
+- [Push Docker Image to Registry (OCIR)](./lab05/content.md)
+- [Deploy Python App on Container Cluster (OKE)](./lab06/content.md)
+- [Oracle Database Changes in CI/CD Workflow](./lab07/content.md)
 
 ## Oracle Cloud Account
 
@@ -43,6 +43,6 @@ If you don't have an Oracle Cloud account then you can quickly and easily sign u
 
 Click here to request your trial account: https://cloud.oracle.com/tryit
 
-## Learn More about Oracle Machine learning
+## Learn More about CI/CD on Oracle Cloud
 
 - [Oracle and Wercker](https://www.oracle.com/corporate/acquisitions/wercker/)

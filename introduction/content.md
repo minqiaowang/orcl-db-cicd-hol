@@ -15,33 +15,37 @@
 * Knowledge of Python is a plus but not required
 * No previous knowledge of machine learning required
 
+## Workshop Components
+
+![](./images/cicd-ws-components.png)
+
 ## Agenda
 
-- **Lab 1 : OCI**
+- **Lab 1 : Oracle Cloud Infrastructure (OCI)**
 
 Oracle Cloud Infrastructure (OCI).
 
-- **Lab 2 : GitHub**
+- **Lab 2 : GitHub Code Repository**
 
 GitHub.
 
-- **Lab 3 : Wercker**
+- **Lab 3 : Oracle Wercker CI Service**
 
 Wercker.
 
-- **Lab 4 : cx_Oracle**
+- **Lab 4 : Oracle Database for Python**
 
 cx_Oracle.
 
-- **Lab 5 : OCIR**
+- **Lab 5 : Push Docker Image to Registry (OCIR)**
 
 Oracle Cloud Infrastructure Registry (OCIR).
 
-- **Lab 6 : Deploy**
+- **Lab 6 : Deploy Python App on Container Cluster (OKE)**
 
 Deploy CI/CD pipeline.
 
-- **Lab 7 : Liquibase**
+- **Lab 7 : Oracle Database Changes in CI/CD Workflow**
 
 Liquibase.
 

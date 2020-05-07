@@ -1,4 +1,4 @@
-# GitHub repository
+# GitHub Code Repository
 
 ## Introduction
 
@@ -104,11 +104,11 @@ sudo yum install -y kubectl
 
 Now OCI CLI and Kubectl are installed.
 
-## Git
+## Git Client
 
 GitHub uses Git version control systems (VCS) to handle the collaboration workflow. This allows developers to create a local copy of the project, makes changes, and merge them back into the central repository.
 
-Check the Git version.
+Check the Git client version.
 
 ````
 git --version
