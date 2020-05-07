@@ -2,49 +2,49 @@
     "tutorials": [
         {
             "title": "Introduction",
-            "description": "Continuous Integration / Continuous Delivery with Oracle Database",
+            "description": "Continuous Integration / Delivery with Oracle Database",
             "publisheddate": "04/01/2020",
             "filename": "./introduction/content.md"
         },
         {
-            "title": "Lab 1: OCI",
-            "description": "OCI",
+            "title": "Lab 1: Oracle Cloud Infrastructure (OCI)",
+            "description": "Oracle Cloud Infrastructure (OCI)",
             "publisheddate": "04/01/2020",
             "filename": "./lab01/content.md"
         },
         {
-            "title": "Lab 2: GitHub",
-            "description": "GitHub",
+            "title": "Lab 2: GitHub Code Repository",
+            "description": "GitHub Code Repository",
             "publisheddate": "04/01/2020",
             "filename": "./lab02/content.md"
         },
         {
-            "title": "Lab 3: Wercker",
-            "description": "Wercker",
+            "title": "Lab 3: Oracle Wercker CI Service",
+            "description": "Oracle Wercker CI Service",
             "publisheddate": "04/01/2020",
             "filename": "./lab03/content.md"
         },
         {
-            "title": "Lab 4: cx_Oracle",
-            "description": "cx_Oracle",
+            "title": "Lab 4: Oracle Database for Python",
+            "description": "Oracle Database for Python",
             "publisheddate": "04/01/2020",
             "filename": "./lab04/content.md"
         },
         {
-            "title": "Lab 5: OCIR",
-            "description": "OCIR",
+            "title": "Lab 5: Push Docker Image to Registry (OCIR)",
+            "description": "Push Docker Image to Registry (OCIR)",
             "publisheddate": "04/01/2020",
             "filename": "./lab05/content.md"
         },
         {
-            "title": "Lab 6: Deploy",
-            "description": "Deploy",
+            "title": "Lab 6: Deploy Python App on Container Cluster (OKE)",
+            "description": "Deploy Python App on Container Cluster (OKE)",
             "publisheddate": "04/01/2020",
             "filename": "./lab06/content.md"
         },
         {
-            "title": "Lab 7: Liquibase",
-            "description": "Liquibase",
+            "title": "Lab 7: Oracle Database Changes in CI/CD Workflow",
+            "description": "Oracle Database Changes in CI/CD Workflow",
             "publisheddate": "04/01/2020",
             "filename": "./lab07/content.md"
         }

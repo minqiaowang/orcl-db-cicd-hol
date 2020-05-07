@@ -1,4 +1,4 @@
-# Continuous Integration / Delivery / Deployment (CI/CD) pipeline with Oracle Database and Python
+# Continuous Integration / Delivery / Deployment (CI/CD) Pipeline with Oracle Database and Python
 
 ## Workshop Overview
 
@@ -38,7 +38,7 @@ The entire workflow, and all pipelines are fully automated. This automation auto
 - **Lab 6 : Deploy Python App on Container Cluster (OKE)**
 - **Lab 7 : Oracle Database Changes in CI/CD Workflow**
 
-## Access the labs
+## Access the Labs
 
 - Use **Lab Contents** menu on your right to access the labs.
     - If the menu is not displayed, click the menu button ![](./images/menu-button.png) on the top right  make it visible.

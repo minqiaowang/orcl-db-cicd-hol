@@ -6,7 +6,7 @@ Development and deployment platforms can be created on Oracle Cloud Infrastructu
 
 In this lab we will create all the required components on OCI.
 
-## Generate SSH keys
+## Generate SSH Keys
 
 On a linux machine you can generate the required ssh keys
 
