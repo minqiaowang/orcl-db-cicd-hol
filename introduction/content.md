@@ -22,32 +22,12 @@
 ## Agenda
 
 - **Lab 1 : Oracle Cloud Infrastructure (OCI)**
-
-Oracle Cloud Infrastructure (OCI).
-
 - **Lab 2 : GitHub Code Repository**
-
-GitHub.
-
 - **Lab 3 : Oracle Wercker CI Service**
-
-Wercker.
-
 - **Lab 4 : Oracle Database for Python**
-
-cx_Oracle.
-
 - **Lab 5 : Push Docker Image to Registry (OCIR)**
-
-Oracle Cloud Infrastructure Registry (OCIR).
-
 - **Lab 6 : Deploy Python App on Container Cluster (OKE)**
-
-Deploy CI/CD pipeline.
-
 - **Lab 7 : Oracle Database Changes in CI/CD Workflow**
-
-Liquibase.
 
 ## Access the labs
 
