@@ -4,7 +4,7 @@
 
 Our application data in stored in an Oracle Database, that runs as a Database Cloud Service on a OCI Database System, and uses Multitenant Architecture (it's a Pluggable Database).
 
-We want our Python web micro service to connect to our Oracle Database,retrieve information about the employees in Human Resources (HR) sample schema, and calculate a promotion or a salary increase.
+We want our Python web micro service to connect to our Oracle Database, retrieve information about the employees in Human Resources (HR) sample schema, and calculate a promotion or a salary increase.
 
 ## Get Database Host and Service
 
@@ -282,7 +282,7 @@ build:
     box: python:3.7
     steps:
 
-    # Step 1: create virtual enviroment and install dependencies
+    # Step 1: create virtual environment and install dependencies
     - script:
         name: install dependencies
         code: |

@@ -531,7 +531,7 @@ Some changes may include PL/SQL scripts. It is a good practice to keep your DDL 
 mkdir plsql
 ````
 
-When a change-log does not create a new object, or a rool-back statement cannot be specified, it is good to have a null statement for rollback for Liquibase to clear the records correctly in the DATABASECHANGELOG table.
+When a change-log does not create a new object, or a roll-back statement cannot be specified, it is good to have a null statement for rollback for Liquibase to clear the records correctly in the DATABASECHANGELOG table.
 
 ````
 gedit plsql/script_001.sql

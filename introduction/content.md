@@ -8,7 +8,7 @@
 
 At a very high level, a CD/CD pipeline usually consists of the following four main steps:
 
-1. **Commit** — When a developer finishes the work on a small change to an application, the code is commited and merged to a central source code repository.
+1. **Commit** — When a developer finishes the work on a small change to an application, the code is committed and merged to a central source code repository.
 2. **Build** — The change is checked out and verified to make sure the software can be run by a computer. This steps includes all dependencies, based on what programming language, set of libraries, and platform are used.
 3. **Automated tests** — The change is tested from multiple angles using unit tests written by developers and testing tools, to ensure the change works and that it doesn't break anything else.
 4. **Deploy** — The built version is deployed to pre-production, or even production environment.
@@ -43,6 +43,6 @@ The entire workflow, and all pipelines are fully automated. This automation auto
 - Use **Lab Contents** menu on your right to access the labs.
     - If the menu is not displayed, click the menu button ![](./images/menu-button.png) on the top right  make it visible.
 
-- From the menu, click on the lab that you like to proceed with. For example, if you like to proceed to **Lab 1**, click **Lab 1 : OCI**.
+- From the menu, click on the lab that you like to proceed with. For example, if you like to proceed to **Lab 1**, click **Lab 1 : Oracle Cloud Infrastructure (OCI)**.
 
 - You may close the menu by clicking ![](./images/menu-close.png "")

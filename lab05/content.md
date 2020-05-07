@@ -297,7 +297,7 @@ kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kube
 deployment.apps/kubernetes-bootcamp created
 ````
 
-List deployments to check if the sample application was deployed successfuly.
+List deployments to check if the sample application was deployed successfully.
 
 ````
 kubectl get deployments

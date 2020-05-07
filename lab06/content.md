@@ -58,7 +58,7 @@ git commit -a -m "Add build pipeline"
 git push
 ````
 
-Now wercker.yml has two setions:
+Now wercker.yml has two sections:
 
 ````
 build:
