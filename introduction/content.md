@@ -6,6 +6,15 @@
 
 >**Note** : Even though there are two CDs in the title (CI/CD/CD), only one is used in the acronym (CI/CD).
 
+At a very high level, a CD/CD pipeline usually consists of the following four main steps:
+
+1. **Commit** — When a developer finishes the work on a small change to an application, the code is commited and merged to a central source code repository.
+2. **Build** — The change is checked out and verified to make sure the software can be run by a computer. This steps includes all dependencies, based on what programming language, set of libraries, and platform are used.
+3. **Automated tests** — The change is tested from multiple angles using unit tests written by developers and testing tools, to ensure the change works and that it doesn't break anything else.
+4. **Deploy** — The built version is deployed to pre-production, or even production environment.
+
+The entire workflow, and all pipelines are fully automated. This automation auto-magically converts a single commit by a developer into an update to production a few hours later.
+
 ## Workshop Requirements
 
 * Access to Oracle Cloud Infrastructure
