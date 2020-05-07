@@ -2,7 +2,9 @@
 
 ## Introduction
 
-At this point we have all the components we need to deploy our Python microservice application to OKE cluster on Oracle Cloud. This requires a new pipeline definition in **wercker.yml** file. We will call it **deploy**. 
+At this point we have all the components we need to deploy our Python micro web service application to OKE cluster on Oracle Cloud. This requires a new pipeline definition in **wercker.yml** file. We will call it **deploy**.
+
+Automated deployment uses YML templates received from the original [vltabacaru/orcl-ws-cicd] GitHub repository we forked.
 
 ## Add Pipeline to Wercker.YML
 
@@ -158,7 +160,7 @@ Show the ID of the latest container deployed on the node.
 docker ps -l -q
 ````
 
-Connect to this last container deployed (this is our Python microservice) using shell command line.
+Connect to this last container deployed (this is our Python micro web service platform) using shell command line.
 
 ````
 docker exec -it [container_ID] sh
@@ -174,7 +176,7 @@ activate_env  oracle-instantclient19.6-basiclite-19.6.0.0.0-1.x86_64.rpm  requir
 keys	      orclvenv							  test_promotion.py
 ````
 
-Exit container and node.
+Close both container and node connections.
 
 ````
 exit
