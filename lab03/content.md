@@ -2,6 +2,10 @@
 
 ## Introduction
 
+There are many tools available for automating CI/CD workflows and pipelines, including hosted solutions such as Cloudbees and Atlassian Bamboo (CI services), and on-premise software such as Jenkins and Teamcity (CI servers).
+
+>**Note** : Workflow/pipeline model requires an Agile methodology where you always have a working release/version of your software product in production, and only apply small changes to it that can be individually tested and deployed.
+
 Wercker is the CI service we will use in this workshop. Wercker empowers organizations and their development teams to achieve continuous integration and continuous delivery (CI/CD) goals with micro-services and Docker. We will create on Wercker an Application having one Workflow with two Pipelines.
 
 Open [https://app.wercker.com](https://app.wercker.com) and login with your GitHub account. 
