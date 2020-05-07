@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Our Python application stores data in an Oracle Database, that runs as a Database Cloud Service on a Database System, and uses Multitenant Architecture.
+Our application data in stored in an Oracle Database, that runs as a Database Cloud Service on a OCI Database System, and uses Multitenant Architecture (it's a Pluggable Database).
 
-We want our micro service to our Oracle Database and calculate a promotion or a salary for the employees in Human Resources (HR) sample schema. 
+We want our Python web micro service to connect to our Oracle Database,retrieve information about the employees in Human Resources (HR) sample schema, and calculate a promotion or a salary increase.
 
 ## Get Database Host and Service
 
@@ -31,6 +31,8 @@ The complete name of the host server has the same format (all small caps) - we w
 ````
 [Your Initials]-host.sub[Number].[Your Initials]vcn.oraclevcn.com
 ````
+
+## Prepare Sample Schema and Data
 
 Connect to the pluggable database and verify HR schema is available.
 
@@ -80,7 +82,7 @@ JOB_HISTORY
 7 rows selected.
 ````
 
-## Python on Oracle Database
+## Connect to Oracle Database from Python
 
 Back on our development environment, let's connect our Python microservice to our Oracle Database. This enhancement requires [cx_Oracle](https://oracle.github.io/python-cx_Oracle/) extension module.
 
@@ -183,6 +185,8 @@ A: Because you need to open port 1521 in your VCN.
 Q: Why does Wercker run the build successfully if the application returns an error?
 A: Because we didn't build a test unit to verify the database connection. One reason to implement Test Driven Development (TDD) with CI/CD.
 
+## Open Ports and Test Database Connection
+
 Access your VCN details in Oracle Cloud console. Click on hamburger menu ≡, then Networking > **Virtual Cloud Networks**.
 
 Click **Security Lists** in the lower left menu, and **Default Security List for [Your Initials]-VCN** on the right side. Click **Add Ingress Rules**.
@@ -267,7 +271,7 @@ git commit -a -m "Add database connection unit test"
 git push
 ````
 
-## Oracle Instant Client on Docker
+## Oracle Instant Client on Docker Container
 
 We have [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client.html) installed on the development machine, but not on the build environment. Remember, our development environment is the Compute Instance on OCI with **Oracle Linux Server 7.7**, based on Cloud Developer Image. Our build, and future deployment environment, is a Docker image with **Debian GNU/Linux 10 (buster)** with Python 3, we get from Docker Hub, called **python:3.7**.
 

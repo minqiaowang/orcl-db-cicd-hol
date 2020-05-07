@@ -2,7 +2,11 @@
 
 ## Introduction
 
-Before we can deploy our application with a CI/CD pipeline in Wercker, we need to push the image to a Docker repository. We will use the repository on Registry (OCIR) we created on Oracle Cloud, called [Your Initials]rep (small case, e.g. vltrep).
+Before we can deploy our application with a CI/CD pipeline in Wercker, we need to push the image to a Docker repository. We will use the repository on Oracle Cloud Infrastructure Registry (OCIR) we created on Oracle Cloud, called [Your Initials]rep (small case, e.g. vltrep).
+
+All information required for pushing and retrieving the built Docker image, deployment on OKE Container Cluster, and Oracle Database connection, will be stored in Wercker variables.
+
+Our deployment will be monitored and managed using Kubernetes Dashboard.
 
 ## Define Wercker Variables
 
@@ -16,7 +20,7 @@ In Wercker, we need to define three environment variables, in the **Environment*
 **DOCKER_PASSWORD**
 
 - Generated Auth Token on Oracle Cloud 
-- }dFhRabc023dfEa7e4:4
+- }dFhRabc999dfEa7e4:4
 - Protected
 
 **DOCKER_REPO**
@@ -203,7 +207,7 @@ kubectl create secret docker-registry [secret_name] --docker-server=[cloud_regio
 E.g.
 
 ````
-kubectl create secret docker-registry ocirsecret --docker-server=eu-frankfurt-1.ocir.io --docker-username='ocitenantexp/scott.tiger@example.com' --docker-password='}dFhRabc023dfEa7e4:4' --docker-email='scott.tiger@email.com'
+kubectl create secret docker-registry ocirsecret --docker-server=eu-frankfurt-1.ocir.io --docker-username='ocitenantexp/scott.tiger@example.com' --docker-password='}dFhRabc999dfEa7e4:4' --docker-email='scott.tiger@email.com'
 
 secret/ocirsecret created
 ````

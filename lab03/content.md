@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Wercker is the CI service we will use in this workshop. Wercker empowers organizations and their development teams to achieve continuous integration and continuous delivery (CI/CD) goals with micro-services and Docker.
+Wercker is the CI service we will use in this workshop. Wercker empowers organizations and their development teams to achieve continuous integration and continuous delivery (CI/CD) goals with micro-services and Docker. We will create on Wercker an Application having one Workflow with two Pipelines.
 
 Open [https://app.wercker.com](https://app.wercker.com) and login with your GitHub account. 
 
