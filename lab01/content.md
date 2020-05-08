@@ -115,7 +115,7 @@ Select **VCN with Internet Connectivity**. Start VCN Wizard.
 
 Next. Create.
 
-### Step 4: Create Subnet
+### Step 3b: Create Subnet
 
 When complete, under Networking > **Virtual Cloud Networks**. Click **[Your Initials]-VCN** for details. Click **Create Subnet**.
 
@@ -129,7 +129,7 @@ When complete, under Networking > **Virtual Cloud Networks**. Click **[Your Init
 
 **Create Subnet**.
 
-## Step 5: Create Database
+## Step 4: Create Database
 
 Click on hamburger menu ≡, then **Bare Metal, VM, and Exadata** under Databases. **Create DB System**.
 
@@ -156,7 +156,7 @@ Next.
 
 **Create DB System**.
 
-## Step 6: Create Compute Instance
+## Step 5: Create Compute Instance
 
 Click on hamburger menu ≡, then Compute > **Instances**. Click **Create Instance**.
 
@@ -169,7 +169,7 @@ Click on hamburger menu ≡, then Compute > **Instances**. Click **Create Instan
 
 Create.
 
-## Step 7: Create Container Cluster
+## Step 6: Create Container Cluster
 
 Click on hamburger menu ≡, then Developer Services > **Container Clusters (OKE)**. Click **Create Cluster**.
 
@@ -202,7 +202,7 @@ Next. **Create Cluster**. Close.
 
 Copy the Cluster OCID in your notes text file, Cluster Id: ocid1.cluster.oc1.eu-frankfurt-1.aa[some_long_string]mu2d
 
-## Step 8: Create Container Repository
+## Step 7: Create Container Repository
 
 Click on hamburger menu ≡, then Developer Services > **Registry (OCIR)**. Click **Create Repository**.
 
@@ -211,7 +211,7 @@ Click on hamburger menu ≡, then Developer Services > **Registry (OCIR)**. Clic
 
 **Create Repository**.
 
-## Step 9: Create Authentication Token
+## Step 8: Create Authentication Token
 
 Click on profile icon 👤 on upper right corner, then on the name of your user. It opens Identity > Users > User Details page. On the lower left side menu, click on **Auth Tokens**.
  
@@ -221,7 +221,7 @@ Click **Generate Token**.
 
 Generated Token: **Copy this token for your records in a text file on your computer** in a notes text file. It will not be shown again.
 
-## Step 10: Create API Key
+## Step 9: Create API Key
 
 In the same dialog, or click on profile icon 👤 on upper right corner, then on the name of your user. It opens Identity > Users > User Details page. On the lower left side menu, click on **API Keys**.
 
@@ -243,7 +243,7 @@ jQIDAQAB
 
 Click Add. Save the **Fingerprint** in your notes text file.
 
-## Step 11: Gather OCID Values
+## Step 10: Gather OCID Values
 
 During the workshop, we will need some OCID values from Oracle Cloud console. Get these values and save them in your text notes file.
 
