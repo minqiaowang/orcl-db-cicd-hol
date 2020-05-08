@@ -272,7 +272,7 @@ Hit Enter to get back control of the compute instance. Now we have the three var
 **OKE_MASTER**
 
 - looks line a URL or IP address and a port number
-- e.g. https://123.123.123.123\:6443 or https://some-name.eu-fra-1.clst.oci.orclcld.com:6443
+- e.g. https://123.123.123.123:6443 or https://some-name.eu-fra-1.clst.oci.orclcld.com:6443
 
 **OKE_TOKEN**
 

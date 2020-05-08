@@ -16,7 +16,7 @@ Use id_rsa Private Key to connect to this Compute Public IP address. This is the
 
 This is the SSH connection command for Mac/Linux. As may notice, the SSH command creates a port forwarding tunnel on port 3389. 
 
-ssh -C -i id_rsa -L 3389\:localhost:3389 opc@[Compute Public IP]
+ssh -C -i id_rsa -L 3389:localhost:3389 opc@[Compute Public IP]
 
 On Windows machines, run Putty, and make sure you include the same port forward for 3389.
 
