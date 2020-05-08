@@ -46,3 +46,12 @@ The entire workflow, and all pipelines are fully automated. This automation auto
 - From the menu, click on the lab that you like to proceed with. For example, if you like to proceed to **Lab 1**, click **Lab 1 : Oracle Cloud Infrastructure (OCI)**.
 
 - You may close the menu by clicking ![](./images/menu-close.png "")
+
+## Acknowledgements
+
+- **Author** - Valentin Leonard Tabacaru
+- **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
+
+See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
+
+
