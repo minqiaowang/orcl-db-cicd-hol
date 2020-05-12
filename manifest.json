@@ -10,43 +10,43 @@
             "title": "Lab 1: Oracle Cloud Infrastructure (OCI)",
             "description": "Oracle Cloud Infrastructure (OCI)",
             "publisheddate": "04/01/2020",
-            "filename": "./lab01/content.md"
+            "filename": "./oci/oci.md"
         },
         {
             "title": "Lab 2: GitHub Code Repository",
             "description": "GitHub Code Repository",
             "publisheddate": "04/01/2020",
-            "filename": "./lab02/content.md"
+            "filename": "./github/github.md"
         },
         {
             "title": "Lab 3: Oracle Wercker CI Service",
             "description": "Oracle Wercker CI Service",
             "publisheddate": "04/01/2020",
-            "filename": "./lab03/content.md"
+            "filename": "./wercker/wercker.md"
         },
         {
             "title": "Lab 4: Oracle Database for Python",
             "description": "Oracle Database for Python",
             "publisheddate": "04/01/2020",
-            "filename": "./lab04/content.md"
+            "filename": "./cx-oracle/cx-oracle.md"
         },
         {
             "title": "Lab 5: Push Docker Image to Registry (OCIR)",
             "description": "Push Docker Image to Registry (OCIR)",
             "publisheddate": "04/01/2020",
-            "filename": "./lab05/content.md"
+            "filename": "./ocir/ocir.md"
         },
         {
             "title": "Lab 6: Deploy Python App on Container Cluster (OKE)",
             "description": "Deploy Python App on Container Cluster (OKE)",
             "publisheddate": "04/01/2020",
-            "filename": "./lab06/content.md"
+            "filename": "./deploy/deploy.md"
         },
         {
             "title": "Lab 7: Oracle Database Changes in CI/CD Workflow",
             "description": "Oracle Database Changes in CI/CD Workflow",
             "publisheddate": "04/01/2020",
-            "filename": "./lab07/content.md"
+            "filename": "./change-log/change-log.md"
         }
     ]
 }
