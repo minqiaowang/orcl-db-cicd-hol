@@ -1,4 +1,4 @@
-# Continuous Integration / Delivery / Deployment (CI/CD) pipeline for Python microservice web application on Oracle Database
+# Continuous Integration / Delivery / Deployment (CI/CD) Pipeline for Python Microservice Web Application on Oracle Database
 
 In order to accelerate the cycles of software solutions development and delivery to customers, many organizations are adopting Agile, Continuous Integration/Delivery/Deployment, and DevOps principles, practices and methodologies. Even though these are different sets of guidelines, they support one another. In this workshop we’ll explain how Oracle Cloud Infrastructure can help you adopt and improve the implementation of Continuous Integration/Delivery/Deployment in your organization, but first let's clear up some of the key concepts.
 
