@@ -14,7 +14,7 @@ In Wercker, we need to define three environment variables, in the **Environment*
 
 **DOCKER_USERNAME**
 
-- format [cloud_tenant]/[cloud_username]
+- format `[cloud_tenant]/[cloud_username]`
 - e.g. ocitenantexp/scott.tiger@example.com
 
 **DOCKER_PASSWORD**
@@ -25,7 +25,7 @@ In Wercker, we need to define three environment variables, in the **Environment*
 
 **DOCKER_REPO**
 
-- format [region].ocir.io/[cloud_tenant]/[registry_OCIR]
+- format `[region].ocir.io/[cloud_tenant]/[registry_OCIR]`
 - e.g. eu-frankfurt-1.ocir.io/ocitenantexp/vltrep
 
 All three variables must have a Delete button on the right side.
@@ -162,11 +162,11 @@ oci setup config
 Provide the requested values.
 
 - Enter a location for your config [/home/oracle/.oci/config]: Enter
-- Enter a user OCID: [User OCID] (e.g. ocid1.user.oc1..aa[some_long_string]xi5q)
-- Enter a tenancy OCID: [Tenancy OCID] (e.g. ocid1.tenancy.oc1..aa[some_long_string]3gfa)
+- Enter a user OCID: [User OCID] (e.g. `ocid1.user.oc1..aa[some_long_string]xi5q`)
+- Enter a tenancy OCID: [Tenancy OCID] (e.g. `ocid1.tenancy.oc1..aa[some_long_string]3gfa`)
 - Enter a region: eu-frankfurt-1
 - Do you want to generate a new RSA key pair? n
-- Enter the location of your private key file: /home/oracle/orcl-ws-cicd/keys/id_rsa
+- Enter the location of your private key file: `/home/oracle/orcl-ws-cicd/keys/id_rsa`
 
 It returns a Fingerprint. Compare it with the Fingerprint you got when you generated the API Key and saved in your notes text file. It must be the same.
 
@@ -190,9 +190,9 @@ Add this export to your .bash_profile by running this command:
 printf "\nexport KUBECONFIG=$HOME/.kube/config" >> $HOME/.bash_profile
 ````
 
-For the deployment, we need three variables: OKE_IMAGESECRET, OKE_MASTER, and OKE_TOKEN.
+For the deployment, we need three variables: `OKE_IMAGESECRET`, `OKE_MASTER`, and `OKE_TOKEN`.
 
-OKE_IMAGESECRET we create it, with a name we choose, e.g. ocirsecret. The creation requires [cloud_region], [cloud_tenant], [cloud_username], generated Auth Token [auth_token] all from Oracle Cloud. And the email address for your account on Docker Hub [docker_email]. 
+`OKE_IMAGESECRET` we create it, with a name we choose, e.g. ocirsecret. The creation requires `[cloud_region]`, `[cloud_tenant]`, `[cloud_username]`, generated Auth Token `[auth_token]` all from Oracle Cloud. And the email address for your account on Docker Hub `[docker_email]`. 
 
 This is the command we have to run - copy it in your notes file, and change the values with the correct ones:
 
@@ -210,7 +210,7 @@ secret/ocirsecret created
 
 Write in your notes text file the value of OKE_IMAGESECRET: ocirsecret.
 
-On Oracle Cloud console, navigate to hamburger menu ≡, then Developer Services > **Container Clusters (OKE)**. Click [Your Initials]cluster, and copy the value of **Kubernetes Address**. This is the value of OKE_MASTER, write it in your notes text file, adding 'https://' in front of it, if it doesn't start with.
+On Oracle Cloud console, navigate to hamburger menu ≡, then Developer Services > **Container Clusters (OKE)**. Click [Your Initials]cluster, and copy the value of **Kubernetes Address**. This is the value of `OKE_MASTER`, write it in your notes text file, adding 'https://' in front of it, if it doesn't start with.
 
 ## Step 4: Kubernetes Dashboard
 
@@ -249,7 +249,7 @@ You can now use the oke-admin service account to view and control the cluster, a
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep oke-admin | awk '{print $1}')
 ````
 
-Write in your notes text file the value of this token, just the sting, without [token:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] in front of it. This is the value of OKE_TOKEN.
+Write in your notes text file the value of this token, just the sting, without [token:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] in front of it. This is the value of `OKE_TOKEN`.
 
 Launch Kubernetes Dashboard on your development environment, and give it a few minutes to start.
 
@@ -277,7 +277,7 @@ Hit Enter to get back control of the compute instance. Now we have the three var
 
 On your laptop browser, navigate to [http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login)
 
-Select Token, and enter the value of OKE_TOKEN, Sign In. This is Kubernetes Dashboard. In Overview, under Services, we have one service called **kubernetes**. Under Secrets, there are two secrets: **ocirsecret** and a default one called default-token-[code].
+Select Token, and enter the value of `OKE_TOKEN`, Sign In. This is Kubernetes Dashboard. In Overview, under Services, we have one service called **kubernetes**. Under Secrets, there are two secrets: **ocirsecret** and a default one called default-token-[code].
 
 Test you can deploy a simple application on your OKE Cluster. Make sure there are no deployments now.
 

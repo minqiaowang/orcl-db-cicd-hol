@@ -302,7 +302,7 @@ $ cp ~/Downloads/Wallet_[Your Initials]ATP.zip ./wallet/
 
 We have [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client.html) installed on the development machine, but not on the build environment. And we need copy the ATP credential file to the instant client. Remember, our development environment is the Compute Instance on OCI with **Oracle Linux Server 7.7**, based on Cloud Developer Image. Our build, and future deployment environment, is a Docker image with **Debian GNU/Linux 10 (buster)** with Python 3, we get from Docker Hub, called **python:3.7**.
 
-We have to add in **wercker.yml** a new Step to prepare our build and future deployment environment with Oracle Instant Client. This new Step has to be executed before the automated tests:
+We have to add in **wercker.yml** two new Steps to prepare our build and future deployment environment with Oracle Instant Client and the credential file for ATP. The new Steps has to be executed before the automated tests:
 
 ````
 build:
@@ -331,7 +331,7 @@ build:
     - script:
         name: copy credential file
         code: |
-            unzip -o -d /usr/lib/oracle/19.6/client64/lib/network/admin/ ./wallet/Wallet_[Your Initials]ATP            
+            unzip -o -d /usr/lib/oracle/19.6/client64/lib/network/admin/ ./wallet/Wallet_[Your Initials]ATP.zip            
     # Step 4: run linter and tests
     - script:
         name: run tests
@@ -341,7 +341,7 @@ build:
             pytest -v --cov=promotion
 ````
 
-This step adds a new package repository, installs two required packages, Oracle Instant Client 19.6, sets **LD_LIBRARY_PATH** environment variable and copy the ATP credential file.
+The step 2 adds a new package repository, installs two required packages, Oracle Instant Client 19.6, sets `LD_LIBRARY_PATH` environment variable. The step 3 unzip the ATP credential file to the instant client directory.
 
 Commit and push the changes.
 
@@ -482,7 +482,7 @@ Listening on http://0.0.0.0:8080/
 Hit Ctrl-C to quit.
 ````
 
-In your browser open [http://localhost:8080/salary_increase/8](http://localhost:8080/salary_increase/8). It simulates a salary increase with 8% for all employees in our HR schema. Now open [http://localhost:8080/add_commission/.15](http://localhost:8080/add_commission/.15). This web service simulates adding 15% to the commission for all employees. 
+In your browser open `[http://localhost:8080/salary_increase/8](http://localhost:8080/salary_increase/8)`. It simulates a salary increase with 8% for all employees in our HR schema. Now open `[http://localhost:8080/add_commission/.15](http://localhost:8080/add_commission/.15)`. This web service simulates adding 15% to the commission for all employees. 
 
 Hit Ctrl-C to close the application.
 

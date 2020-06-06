@@ -49,7 +49,7 @@ deploy:
         command: rollout status deployment/orcl-ws-app
 ````
 
-This Pipeline has five Steps, and uses the two templates provided as YML files, one for the Docker container deployment, the other for the Docker service. It also uses some default Wercker variables, like WERCKER_OUTPUT_DIR, and the custom environment variables we defined, like OKE_MASTER. Last three steps use Kubectl tool to apply the definition in the YML files, wait for two minutes, and verify the deployment.
+This Pipeline has five Steps, and uses the two templates provided as YML files, one for the Docker container deployment, the other for the Docker service. It also uses some default Wercker variables, like `WERCKER_OUTPUT_DIR`, and the custom environment variables we defined, like `OKE_MASTER`. Last three steps use Kubectl tool to apply the definition in the YML files, wait for two minutes, and verify the deployment.
 
 Commit and push changes to the master branch.
 

@@ -244,7 +244,7 @@ In the same dialog, or click on profile icon 👤 on upper right corner, then on
 
 Click **Add Public Key**. Select **Paste Public Keys**.
 
-- Public Key: paste the content of id_rsa_pub.pem
+- Public Key: paste the content of `id_rsa_pub.pem`
 
 ````
 -----BEGIN PUBLIC KEY-----

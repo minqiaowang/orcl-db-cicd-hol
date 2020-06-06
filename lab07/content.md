@@ -619,7 +619,7 @@ ALTER TRIGGER trg_employees_changes ENABLE
 --rollback drop trigger trg_employees_changes;
 ````
 
-It is also a good practice to return errors so others can understand the business logic behind the new database objects. In this example we use the function **raise_application_error(error_number, message)**. The error_number is a negative integer with the range from -20999 to -20000. The message is a character string that represents the error message, with a length up to 2048 bytes.
+It is also a good practice to return errors so others can understand the business logic behind the new database objects. In this example we use the function `raise_application_error(error_number, message)`. The `error_number` is a negative integer with the range from -20999 to -20000. The message is a character string that represents the error message, with a length up to 2048 bytes.
 
 Add another change-log for a second trigger.
 
