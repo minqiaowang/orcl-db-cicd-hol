@@ -33,7 +33,7 @@ The entire workflow, and all pipelines are fully automated. This automation auto
 - **Lab 1 : Oracle Cloud Infrastructure (OCI)**
 - **Lab 2 : GitHub Code Repository**
 - **Lab 3 : Oracle Wercker CI Service**
-- **Lab 4 : Oracle ATP for Python**
+- **Lab 4 : Oracle Autonomous Database for Python**
 - **Lab 5 : Push Docker Image to Registry (OCIR)**
 - **Lab 6 : Deploy Python App on Container Cluster (OKE)**
 - **Lab 7 : Oracle Database Changes in CI/CD Workflow**
