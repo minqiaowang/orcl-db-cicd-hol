@@ -129,32 +129,50 @@ When complete, under Networking > **Virtual Cloud Networks**. Click **[Your Init
 
 **Create Subnet**.
 
-## Step 4: Create Database
+### Step 3c: Create Network Security Group
 
-Click on hamburger menu ≡, then **Bare Metal, VM, and Exadata** under Databases. **Create DB System**.
+When complete, under Networking > **Virtual Cloud Networks**.  Click **[Your Initials]-VCN** for details. Click **Network Security Groups** under the Resources. Click **Create Network Security Group**.
+
+- Name: [Your Initials]-NSG (e.g. VLT-NSG)
+- Compartment: [Your Compartment]
+
+**Next**, Set Security Rules
+
+- DIRECTION: Ingress
+- SOURCE TYPE: CIDR
+- SOURCE CIDR: 0.0.0.0/0
+- IP PROTOCOL: All Protocols
+- SOURCE PORT RANGE: All
+- DESTINATION PORT RANGE: All
+
+**Create**.
+
+## Step 4: Create ATP
+
+Click on hamburger menu ≡, then **Autonomous Transaction Processing** under Databases. **Create Autonomous Database**.
 
 - Select a compartment: [Your Compartment]
-- Name your DB system: [Your Initials]-DB (e.g. VLT-DB)
-- Select a shape type: Virtual Machine
-- Select a shape: VM.Standard2.1
-- Add public SSH keys: Upload SSH key files > id_rsa.pub
-- Choose a license type: Bring Your Own License (BYOL)
+- Name your ATP: [Your Initials]ATP (e.g. VLTATP)
+- Choose a workload type: Transaction Processing
+- Choose a deployment type: Shared Infrastructure
 
-Specify the network information.
+Configure the database.
+
+- Choose database version: 19c
+- OCPU count: 1
+- Storage (TB): 1
+- Auto scaling: Checked
+- Create administrator credentials: WelCom3#2020_
+
+Choose network access: Virtual cloud network
 
 - Virtual cloud network: [Your Initials]-VCN
-- Client Subnet: Public Subnet
-- Hostname prefix: [Your Initials]-host (small case, e.g. vlt-host)
+- Subnet: Public Subnet
+- Network security groups (NSGs): [Your Initials]-NSG
 
-Next.
+Choose a license type: BYOL
 
-- Database name: [Your Initials]DB (e.g. VLTDB)
-- Database version: 19c
-- PDB name: PDB01
-- Password: WelCom3#2020_
-- Select workload type: Transaction Processing
-
-**Create DB System**.
+**Create Autonomous Database**.
 
 ## Step 5: Create Compute Instance
 
@@ -177,7 +195,6 @@ Select **Custom Create** > **Launch Workflow**.
 
 - Name: [Your Initials]cluster (e.g. VLTcluster)
 - Kubernetes Dashboard Enabled
-- Tiller (Helm) Enabled
 
 Next.
 
@@ -187,7 +204,7 @@ Next.
 Next.
 
 - Node Pool Name: [Your Initials]-pool
-- Image: Oracle-Linux-7.7-latest
+- Image: Oracle-Linux-7.8-latest
 - Shape: VM.Standard.E2.1
 - Number of nodes: 2
 - Availability Domain: any
@@ -200,7 +217,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDo/Wi4PisOVl0xhRsAklQ+HnmtHYYp/c9Q0iD//XEj
 
 Next. **Create Cluster**. Close.
 
-Copy the Cluster OCID in your notes text file, Cluster Id: ocid1.cluster.oc1.eu-frankfurt-1.aa[some_long_string]mu2d
+Copy the Cluster OCID in your notes text file, Cluster Id: `ocid1.cluster.oc1.eu-frankfurt-1.aa[some_long_string]mu2d`
 
 ## Step 7: Create Container Repository
 
@@ -214,7 +231,7 @@ Click on hamburger menu ≡, then Developer Services > **Registry (OCIR)**. Clic
 ## Step 8: Create Authentication Token
 
 Click on profile icon 👤 on upper right corner, then on the name of your user. It opens Identity > Users > User Details page. On the lower left side menu, click on **Auth Tokens**.
- 
+
 Click **Generate Token**.
 
 - Description: CICD Token
@@ -249,20 +266,20 @@ During the workshop, we will need some OCID values from Oracle Cloud console. Ge
 
 ### User OCID
 
-In the same dialog, or click on profile icon 👤 on upper right corner, then on the name of your user. Copy OCID: ocid1.user.oc1..aa[some_long_string]xi5q
+In the same dialog, or click on profile icon 👤 on upper right corner, then on the name of your user. Copy OCID: `ocid1.user.oc1..aa[some_long_string]xi5q`
 
 ### Tenancy OCID
 
-Click on hamburger menu ≡, then Administration > **Tenancy Details**. Copy OCID: ocid1.tenancy.oc1..aa[some_long_string]3gfa
+Click on hamburger menu ≡, then Administration > **Tenancy Details**. Copy OCID: `ocid1.tenancy.oc1..aa[some_long_string]3gfa`
 
 ### Compartment OCID
 
-Click on hamburger menu ≡, then Identity > **Compartments**. Click on your Compartment. Copy OCID: ocid1.compartment.oc1..aa[some_long_string]s6ha
+Click on hamburger menu ≡, then Identity > **Compartments**. Click on your Compartment. Copy OCID: `ocid1.compartment.oc1..aa[some_long_string]s6ha`
 
 ## Acknowledgements
 
 - **Author** - Valentin Leonard Tabacaru
-- **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
+- **Last Updated By/Date** - Minqiao Wang, DB Product Management, June 2020
 
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-We have a web application developed in Python, running as a micro-service in a Docker container, on OKE cluster using OCI. This application connects to an Oracle Database, and we have seen how CI/CD principles and concepts can be applied to develop this application. We will apply same principles to Oracle Database changes, while altering existing objects, or create new ones, at the same time with application development. Furthermore, we track all database changes, merge them with the code master branch, and make them available to all developers.
+We have a web application developed in Python, running as a micro-service in a Docker container, on OKE cluster using OCI. This application connects to an Oracle autonomous database - ATP, and we have seen how CI/CD principles and concepts can be applied to develop this application. We will apply same principles to Oracle database changes, while altering existing objects, or create new ones, at the same time with application development. Furthermore, we track all database changes, merge them with the code master branch, and make them available to all developers.
 
 There are two methods to capture and track database changes:
 
@@ -29,7 +29,7 @@ wget https://github.com/liquibase/liquibase/releases/download/v3.8.9/liquibase-3
 
 mkdir liquibase3.8.9
 
-tar -xvf liquibase-3.8.9.tar.gz -d liquibase3.8.9/
+tar -zxvf liquibase-3.8.9.tar.gz -C liquibase3.8.9/
 ````
 
 Add a symbolic link to Liquibase executable command to oracle's binary files.
@@ -37,7 +37,7 @@ Add a symbolic link to Liquibase executable command to oracle's binary files.
 ````
 mkdir bin
 
-ln -s liquibase3.8.9/liquibase bin/liquibase
+ln -s /home/oracle/liquibase3.8.9/liquibase bin/liquibase
 ````
 
 Check Liquibase version.
@@ -79,7 +79,7 @@ cd liquibase_test
 Create a test user in your database.
 
 ````
-sqlplus sys/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] as sysdba
+sqlplus admin/WelCom3#2020_@[Your Initials]ATP_TP
 
 drop user cicd_user cascade;
 
@@ -91,7 +91,7 @@ GRANT UNLIMITED TABLESPACE TO cicd_user;
 Login as test user.
 
 ````
-conn cicd_user/WelCom3#2020_@//[DB_system_host]/[PDB_service_name]
+conn cicd_user/WelCom3#2020_@[Your Initials]ATP_TP
 ````
 
 Create some objects in test user schema: a table, a trigger, a sequence, and a function. Run these commands one by one.
@@ -139,6 +139,40 @@ Exit SQL*Plus.
 exit;
 ````
 
+Work as **opc** user. Navigate to the instant client directory where we unzip the wallet files. Edit the `ojdbc.properties` file
+
+```
+cd /usr/lib/oracle/18.5/client64/lib/network/admin
+sudo vi ojdbc.properties
+```
+
+  The file look like the following:
+
+- Comment out the `oracle.net.wallet_location` line.
+- Set `javax.net.ssl.trustStorePassword` to the wallet password when you set during download the credential file.
+- Set `javax.net.ssl.keyStorePassword` to the wallet password when you set during download the credential file.
+
+```
+# Connection property while using Oracle wallets.
+#oracle.net.wallet_location=(SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=${TNS_ADMIN})))
+# FOLLOW THESE STEPS FOR USING JKS
+# (1) Uncomment the following properties to use JKS.
+# (2) Comment out the oracle.net.wallet_location property above
+# (3) Set the correct password for both trustStorePassword and keyStorePassword.
+# It's the password you specified when downloading the wallet from OCI Console or the Service Console.
+javax.net.ssl.trustStore=${TNS_ADMIN}/truststore.jks
+javax.net.ssl.trustStorePassword=WelCom3#2020_
+javax.net.ssl.keyStore=${TNS_ADMIN}/keystore.jks
+javax.net.ssl.keyStorePassword=WelCom3#2020_
+```
+
+Sudo to the **oracle** user, and cd to the `liquibase_test` folder.
+
+```
+sudo su - oracle
+cd /orcl-ws-cicd/liquibase_test
+```
+
 Create a properties file to store your database connection information.
 
 ````
@@ -149,8 +183,8 @@ Write the following lines, and save the file before closing.
 
 ````
 driver : oracle.jdbc.OracleDriver
-classpath : /usr/lib/oracle/18.3/client64/lib/ojdbc8.jar
-url : jdbc:oracle:thin:@//[DB_system_host]/[PDB_service_name]
+classpath : /usr/lib/oracle/18.5/client64/lib/ojdbc8.jar
+url : jdbc:oracle:thin:@[Your Initials]ATP_TP?TNS_ADMIN=/usr/lib/oracle/18.5/client64/lib/network/admin
 username : cicd_user
 password : WelCom3#2020_
 ````
@@ -205,8 +239,8 @@ Contents of the file are the same, with an extra line, that defines a master cha
 
 ````
 driver : oracle.jdbc.OracleDriver
-classpath : /usr/lib/oracle/18.3/client64/lib/ojdbc8.jar
-url : jdbc:oracle:thin:@//[DB_system_host]/[PDB_service_name]
+classpath : /usr/lib/oracle/18.5/client64/lib/ojdbc8.jar
+url : jdbc:oracle:thin:@[Your Initials]ATP_TP?TNS_ADMIN=/usr/lib/oracle/18.5/client64/lib/network/admin
 username : cicd_user
 password : WelCom3#2020_
 changeLogFile : cicd-master.xml
@@ -267,7 +301,7 @@ exit;
 Run the verification script.
 
 ````
-sqlplus cicd_user/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] @query_log
+sqlplus cicd_user/WelCom3#2020_@[Your Initials]ATP_TP @query_log
 
 AUTHOR	   FILENAME		ORDEREXECUTED TAG	      COMMENTS
 ---------- -------------------- ------------- --------------- --------------------------------------------------
@@ -283,7 +317,7 @@ liquibase --changeLogFile="changelog_001.sql" rollbackCount 1
 Verify the change-log.
 
 ````
-sqlplus cicd_user/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] @query_log
+sqlplus cicd_user/WelCom3#2020_@[Your Initials]ATP_TP @query_log
 
 no rows selected
 ````
@@ -374,7 +408,7 @@ liquibase update
 Verify changes are applied and recored in our database.
 
 ````
-sqlplus cicd_user/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] @query_log
+sqlplus cicd_user/WelCom3#2020_@[Your Initials]ATP_TP @query_log
 
 AUTHOR	   FILENAME		ORDEREXECUTED TAG	      COMMENTS
 ---------- -------------------- ------------- --------------- --------------------------------------------------
@@ -393,7 +427,7 @@ liquibase rollbackCount 1
 Now we have only the change-logs applied and recorded, but not the change-set.
 
 ````
-sqlplus cicd_user/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] @query_log
+sqlplus cicd_user/WelCom3#2020_@[Your Initials]ATP_TP @query_log
 
 AUTHOR	   FILENAME		ORDEREXECUTED TAG	      COMMENTS
 ---------- -------------------- ------------- --------------- --------------------------------------------------
@@ -411,7 +445,7 @@ liquibase rollbackCount 2
 Check the results.
 
 ````
-sqlplus cicd_user/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] @query_log
+sqlplus cicd_user/WelCom3#2020_@[Your Initials]ATP_TP @query_log
 
 AUTHOR	   FILENAME		ORDEREXECUTED TAG	      COMMENTS
 ---------- -------------------- ------------- --------------- --------------------------------------------------
@@ -458,7 +492,7 @@ liquibase update
 Verify the changes on the database.
 
 ````
-sqlplus cicd_user/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] @query_log
+sqlplus cicd_user/WelCom3#2020_@[Your Initials]ATP_TP @query_log
 
 AUTHOR	   FILENAME		ORDEREXECUTED TAG	      COMMENTS
 ---------- -------------------- ------------- --------------- --------------------------------------------------
@@ -478,7 +512,7 @@ liquibase rollback version_1.0
 Check the results.
 
 ````
-sqlplus cicd_user/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] @query_log
+sqlplus cicd_user/WelCom3#2020_@[Your Initials]ATP_TP @query_log
 
 AUTHOR	   FILENAME		ORDEREXECUTED TAG	      COMMENTS
 ---------- -------------------- ------------- --------------- --------------------------------------------------
@@ -648,8 +682,8 @@ gedit liquibase.properties
 
 ````
 driver : oracle.jdbc.OracleDriver
-classpath : /usr/lib/oracle/18.3/client64/lib/ojdbc8.jar
-url : jdbc:oracle:thin:@//[DB_system_host]/[PDB_service_name]
+classpath : /usr/lib/oracle/18.5/client64/lib/ojdbc8.jar
+url : jdbc:oracle:thin:@[Your Initials]ATP_TP?TNS_ADMIN=/usr/lib/oracle/18.5/client64/lib/network/admin
 username : hr
 password : WelCom3#2020_
 changeLogFile : hr-master.xml
@@ -723,7 +757,7 @@ liquibase update
 Once finished, check the results.
 
 ````
-sqlplus hr/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] @query_log
+sqlplus hr/WelCom3#2020_@vltatp_tp @query_log
 
 OBJECT_NAME		       OBJECT_TYPE
 ------------------------------ -----------------------
@@ -769,7 +803,7 @@ With these files on the repository, all developers will know exactly what change
 ## Acknowledgements
 
 - **Author** - Valentin Leonard Tabacaru
-- **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
+- **Last Updated By/Date** - Minqiao Wang, DB Product Management, June 2020
 
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
 

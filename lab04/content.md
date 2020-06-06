@@ -1,90 +1,135 @@
-# Oracle Database for Python
+# Oracle Autonomous Database for Python
 
 ## Introduction
 
-Our application data in stored in an Oracle Database, that runs as a Database Cloud Service on a OCI Database System, and uses Multitenant Architecture (it's a Pluggable Database).
+Our application data in stored in an Oracle ATP, that runs as an Autonomous Database Cloud Service on the OCI.
 
-We want our Python web micro service to connect to our Oracle Database, retrieve information about the employees in Human Resources (HR) sample schema, and calculate a promotion or a salary increase.
+We want our Python web micro service to connect to our ATP, retrieve information about the employees in Human Resources (HR) sample schema, and calculate a promotion or a salary increase.
 
-## Step 1: Get Database Host and Service
+## Step 1: Download the ATP Client Credentials
 
-Connect to the DB System you created on OCI, called [Your Initials]-DB. 
+Connect to your Compute Instance with Remote Desktop. Open a browser and connect to the OCI. Click on hamburger menu ≡, then **Autonomous Transaction Processing** under Databases. Click **[Your Initials]ATP** for details. Click **Database Connection** and Click **Download Wallet**.
+
+Password: WelCom3#2020_
+
+Click **Download** and **Save File**.
+
+
+
+Back to the terminal connecting the VM. You can verify that a zip file has been downloaded in the directory.
 
 ````
-ssh -C -i ~/orcl-ws-cicd/keys/id_rsa opc@[DB System Public IP]
+$ ls /home/oracle/Downloads
+Wallet_[Your Initials]ATP.zip
+````
+
+A version of 18.5 Oracle instant client has already been installed in this VM. 
+
+Exit to the **opc** user. Unzip the file to the directory of the oracle instant client.
+
+````
+$ sudo unzip -o -d /usr/lib/oracle/18.5/client64/lib/network/admin/ /home/oracle/Downloads/Wallet_[Your Initials]ATP.zip 
+````
+Back to the **oracle** user again.
+
+````
 sudo su - oracle
+cd ~/orcl-ws-cicd
+. ./orclvenv/bin/activate
 ````
 
-Check the status of the listener. 
+Test the ATP connection with sqlplus.
 
 ````
-lsnrctl status
-````
-Save in your notes text file the complete name of the pluggable database service, it has this format (all small caps) - we will call it [PDB_service_name]:
+$ export PATH=/usr/lib/oracle/18.5/client64/bin:$PATH
+$ export LD_LIBRARY_PATH=/usr/lib/oracle/18.5/client64/lib
+$ sqlplus admin/WelCom3#2020_@[Your Initials]ATP_TP
 
-````
-pdb01.sub[Number].[Your Initials]vcn.oraclevcn.com
-````
+SQL*Plus: Release 18.0.0.0.0 - Production on Fri Jun 5 05:02:37 2020
+Version 18.5.0.0.0
 
-The complete name of the host server has the same format (all small caps) - we will call it [DB_system_host]:
+Copyright (c) 1982, 2018, Oracle.  All rights reserved.
 
-````
-[Your Initials]-host.sub[Number].[Your Initials]vcn.oraclevcn.com
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.5.0.0.0
+
+SQL> 
 ````
 
 ## Step 2: Prepare Sample Schema and Data
 
-Connect to the pluggable database and verify HR schema is available.
+In the SQLPLUS, connect as **admin** user, create the **HR** user.
 
 ````
-sqlplus sys/WelCom3#2020_@//[DB_system_host]/[PDB_service_name] as sysdba
-
-select username from all_users where username = 'HR';
-
-no rows selected
+CREATE USER hr IDENTIFIED BY WelCom3#2020_;
+GRANT CREATE SESSION TO hr;
+GRANT DWROLE TO hr;
+GRANT UNLIMITED TABLESPACE TO hr;
 ````
 
-We need to install HR sample schema. Use the values from this example:
+Create the Cloud Object Storage credential. We will use the pre-authenticated URI to import data, but still need to supply a credential parameter. However, credentials for a pre-authenticated URL are ignored (and the supplied credentials do not need to be valid). So don't worry about the username and password parameter values to create the credential. 
 
 ````
-SQL> @?/demo/schema/human_resources/hr_main.sql
+connect hr/WelCom3#2020_@[Your Initials]ATP_TP;
+BEGIN
+  DBMS_CLOUD.CREATE_CREDENTIAL(
+    credential_name => 'DEF_CRED_NAME',
+    username => 'atp_user@example.com',
+    password => 'password'
+  );
+END;
+/
+exit;
+````
 
-specify password for HR as parameter 1:
-Enter value for 1: WelCom3#2020_
+Import data into HR schema.
 
-specify default tablespeace for HR as parameter 2:
-Enter value for 2: USERS
-
-specify temporary tablespace for HR as parameter 3:
-Enter value for 3: TEMP
-
-specify log path as parameter 4:
-Enter value for 4: $ORACLE_HOME/demo/schema/log/
+````
+$ impdp hr/WelCom3#2020_@[Your Initials]ATP_TP directory=data_pump_dir credential=def_cred_name dumpfile= https://objectstorage.ap-seoul-1.oraclecloud.com/p/dqWb29uU2L1hwltBvjP58EHl25Pi90vBevHTR93F9tw/n/oraclepartnersas/b/DB19c/o/hr.dmp     
 ````
 
 Test HR schema.
 
-````
-SQL> conn hr/WelCom3#2020_@//[DB_system_host]/[PDB_service_name]
-Connected.
+```
+$ sqlplus hr/WelCom3#2020_@[Your Initials]ATP_TP
+
+SQL*Plus: Release 18.0.0.0.0 - Production on Fri Jun 5 06:12:10 2020
+Version 18.5.0.0.0
+
+Copyright (c) 1982, 2018, Oracle.  All rights reserved.
+
+Last Successful login time: Fri Jun 05 2020 06:09:04 +00:00
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.5.0.0.0
+
 SQL> select table_name from user_tables;
 
 TABLE_NAME
 --------------------------------------------------------------------------------
-REGIONS
 COUNTRIES
-LOCATIONS
-DEPARTMENTS
-JOBS
-EMPLOYEES
 JOB_HISTORY
+LOCATIONS
+JOBS
+DEPARTMENTS
+REGIONS
+EMPLOYEES
 
 7 rows selected.
-````
 
-## Step 3: Connect to Oracle Database from Python
+SQL> exit
+Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.5.0.0.0
+```
 
-Back on our development environment, let's connect our Python microservice to our Oracle Database. This enhancement requires [cx_Oracle](https://oracle.github.io/python-cx_Oracle/) extension module.
+
+
+## Step 3: Connect to ATP from Python
+
+Back on our development environment, let's connect our Python microservice to our Oracle Autonomous Database. This enhancement requires [cx_Oracle](https://oracle.github.io/python-cx_Oracle/) extension module.
 
 ````
 pip install cx_Oracle
@@ -110,9 +155,8 @@ Finally, add the connection code to the '\_\_main__' section.
 ````
     DBUSER = 'hr'
     DBPASS = 'WelCom3#2020_'
-    DBHOST = '[Your Initials]-host.sub[Number].[Your Initials]vcn.oraclevcn.com'
-    DBSERV = 'pdb01.sub[Number].[Your Initials]vcn.oraclevcn.com'
-    conn_string = DBUSER + '/' + DBPASS + '@//' + DBHOST + '/' + DBSERV
+    DBSERV = '[Your Initials]ATP_TP'
+    conn_string = DBUSER + '/' + DBPASS + '@' + DBSERV
     connection = cx_Oracle.connect(conn_string)
     run(app, host='0.0.0.0', port=8080)
     connection.close()
@@ -153,10 +197,9 @@ def conn():
 
 if __name__ == '__main__':
     DBUSER = 'hr'
-    DBPASS = 'WelCom3#2020_' 
-    DBHOST = '[Your Initials]-host.sub[Number].[Your Initials]vcn.oraclevcn.com'
-    DBSERV = 'pdb01.sub[Number].[Your Initials]vcn.oraclevcn.com'
-    conn_string = DBUSER + '/' + DBPASS + '@//' + DBHOST + '/' + DBSERV
+    DBPASS = 'WelCom3#2020_'
+    DBSERV = '[Your Initials]ATP_TP'
+    conn_string = DBUSER + '/' + DBPASS + '@' + DBSERV
     connection = cx_Oracle.connect(conn_string)
     run(app, host='0.0.0.0', port=8080)
     connection.close()
@@ -169,35 +212,13 @@ git commit -a -m "Add database connection"
 git push
 ````
 
-Verify build is successful. Test your web microservice connects to your Oracle Database.
+Verify build is successful. 
 
-````
-python3 promotion.py 
-Traceback (most recent call last):
-  File "promotion.py", line 37, in <module>
-    connection = cx_Oracle.connect(conn_string)
-cx_Oracle.DatabaseError: ORA-12170: TNS:Connect timeout occurred
-````
 
-Q: Why do you receive this error? 
-A: Because you need to open port 1521 in your VCN. 
 
-Q: Why does Wercker run the build successfully if the application returns an error?
-A: Because we didn't build a test unit to verify the database connection. One reason to implement Test Driven Development (TDD) with CI/CD.
+## Step 4: Test Database Connection
 
-## Step 4: Open Ports and Test Database Connection
-
-Access your VCN details in Oracle Cloud console. Click on hamburger menu ≡, then Networking > **Virtual Cloud Networks**.
-
-Click **Security Lists** in the lower left menu, and **Default Security List for [Your Initials]-VCN** on the right side. Click **Add Ingress Rules**.
-
-- Source CIDR: 0.0.0.0/0
-- Destination Port Range: 1521
-- Description: Allow database connection
-
-Leave the default values for other controls. Click **Add Ingress Rules**. This rule gives access to the entire Internet to connect to our database, but for this lab it is fine, we want to keep it simple.
-
-On our development environment, try again the application
+On our development environment, test the application
 
 ````
 python3 promotion.py 
@@ -206,9 +227,9 @@ Listening on http://0.0.0.0:8080/
 Hit Ctrl-C to quit.
 ````
 
-Use the web browser on your laptop to open [http://localhost:8080/conn](http://localhost:8080/conn). The response is '19.6.0.0.0'. Your Python web micro service application is connected to your Oracle Database. Press Ctrl-C to stop the application.
+Use the web browser on your laptop to open [http://localhost:8080/conn](http://localhost:8080/conn). The response is '19.5.0.0.0'. Your Python web micro service application is connected to your Oracle Database. Press Ctrl-C to stop the application.
 
-Edit test_promotion.py, and add a unit test for database connection. This is how it has to be:
+Edit `test_promotion.py`, and add a unit test for database connection. This is how it has to be:
 
 ````
 """
@@ -253,16 +274,15 @@ def test_addition(application):
 def test_connection():
     DBUSER = 'hr'
     DBPASS = 'WelCom3#2020_'
-    DBHOST = '[Your Initials]-host.sub[Number].[Your Initials]vcn.oraclevcn.com'
-    DBSERV = 'pdb01.sub[Number].[Your Initials]vcn.oraclevcn.com'
-    conn_string = DBUSER + '/' + DBPASS + '@//' + DBHOST + '/' + DBSERV
+    DBSERV = '[Your Initials]ATP_TP'
+    conn_string = DBUSER + '/' + DBPASS + '@' + DBSERV
     connection = cx_Oracle.connect(conn_string)
     response = connection.version
-    assert response == '19.6.0.0.0'
+    assert response == '19.5.0.0.0'
     connection.close()
 ````
 
-We added a line at the top to import cx_Oracle extension module, and a fixture that will only be run once for the entire test session.
+We added a line at the top to import `cx_Oracle` extension module, and a fixture that will only be run once for the entire test session.
 
 Commit and push the changes to the master branch on code repository.
 
@@ -273,7 +293,14 @@ git push
 
 ## Step 5: Oracle Instant Client on Docker Container
 
-We have [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client.html) installed on the development machine, but not on the build environment. Remember, our development environment is the Compute Instance on OCI with **Oracle Linux Server 7.7**, based on Cloud Developer Image. Our build, and future deployment environment, is a Docker image with **Debian GNU/Linux 10 (buster)** with Python 3, we get from Docker Hub, called **python:3.7**.
+We need copy the ATP credential file to the git repository
+
+```
+$ mkdir wallet
+$ cp ~/Downloads/Wallet_[Your Initials]ATP.zip ./wallet/
+```
+
+We have [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client.html) installed on the development machine, but not on the build environment. And we need copy the ATP credential file to the instant client. Remember, our development environment is the Compute Instance on OCI with **Oracle Linux Server 7.7**, based on Cloud Developer Image. Our build, and future deployment environment, is a Docker image with **Debian GNU/Linux 10 (buster)** with Python 3, we get from Docker Hub, called **python:3.7**.
 
 We have to add in **wercker.yml** a new Step to prepare our build and future deployment environment with Oracle Instant Client. This new Step has to be executed before the automated tests:
 
@@ -300,7 +327,12 @@ build:
             wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-basiclite-19.6.0.0.0-1.x86_64.rpm
             alien -i oracle-instantclient19.6-basiclite-19.6.0.0.0-1.x86_64.rpm
             export LD_LIBRARY_PATH=/usr/lib/oracle/19.6/client64/lib:$LD_LIBRARY_PATH
-    # Step 3: run linter and tests
+    # Step 3: copy ATP credential file
+    - script:
+        name: copy credential file
+        code: |
+            unzip -o -d /usr/lib/oracle/19.6/client64/lib/network/admin/ ./wallet/Wallet_[Your Initials]ATP            
+    # Step 4: run linter and tests
     - script:
         name: run tests
         code: |
@@ -309,11 +341,12 @@ build:
             pytest -v --cov=promotion
 ````
 
-This step adds a new package repository, installs two required packages, Oracle Instant Client 19.6, and sets **LD_LIBRARY_PATH** environment variable.
+This step adds a new package repository, installs two required packages, Oracle Instant Client 19.6, sets **LD_LIBRARY_PATH** environment variable and copy the ATP credential file.
 
 Commit and push the changes.
 
 ````
+git add wallet/Wallet_[Your Initials]ATP.zip
 git commit -a -m "Add Oracle Instant Client"
 git push
 ````
@@ -463,7 +496,7 @@ In this lab, we were able to:
 ## Acknowledgements
 
 - **Author** - Valentin Leonard Tabacaru
-- **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
+- **Last Updated By/Date** - Minqiao Wang, DB Product Management, June 2020
 
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
 

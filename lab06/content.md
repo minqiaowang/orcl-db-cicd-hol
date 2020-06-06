@@ -92,7 +92,6 @@ We defined environment variables in Wercker for our database connection:
 
 - DB_USER
 - DB_PASSWORD
-- DB_HOST
 - DB_SERVICE
 
 Change the application code in **promotion.py** to use these variables. Import **os** library:
@@ -113,7 +112,6 @@ Change the code in the '\_\_main__' section to use these OS variables:
 if __name__ == '__main__':
     DBUSER = os.getenv('DB_USER')
     DBPASS = os.getenv('DB_PASSWORD')
-    DBHOST = os.getenv('DB_HOST')
     DBSERV = os.getenv('DB_SERVICE')
 ...
 ````
@@ -140,7 +138,7 @@ orcl-ws-app           1/1     1            1           3m34s
 
 Open Kubernetes Dashboard, login using the token, and check the deployment on Overview under **Deployments**. Go down on the page, and view our Python microservice under **Services**, **orcl-ws-app**. Copy the IP address of this microservice under External endpoints, [orcl-ws-app-IP]. 
 
-Open a browser on your laptop, and navigate to [orcl-ws-app-IP]/conn. The response is '19.6.0.0.0'. Your Python web micro service application is connected to your Oracle Database and it returns the Database version.
+Open a browser on your laptop, and navigate to [orcl-ws-app-IP]/conn. The response is '19.5.0.0.0'. Your Python web micro service application is connected to your Oracle Database and it returns the Database version.
 
 In your browser open [orcl-ws-app-IP]/salary_increase/8. It simulates a salary increase with 8% for all employees in our HR schema. 
 
@@ -187,7 +185,7 @@ exit
 ## Acknowledgements
 
 - **Author** - Valentin Leonard Tabacaru
-- **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
+- **Last Updated By/Date** - Minqiao Wang,  DB Product Management, June 2020
 
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
 

@@ -41,13 +41,9 @@ Now, the database connection details are hardcoded in our application. These det
 - WelCom3#2020_
 - Protected
 
-**DB_HOST**
-
-- [Your Initials]-host.sub[Number].[Your Initials]vcn.oraclevcn.com
-
 **DB_SERVICE**
 
-- pdb01.sub[Number].[Your Initials]vcn.oraclevcn.com
+- [Your Initials]ATP_TP
 
 ## Step 2: Launch Web Service on Docker
 
@@ -118,11 +114,11 @@ chmod a+x promotion activate_env
 Now, we can add the Docker push image Step in **wercker.yml**. Add this step at the end of the file.
 
 ````
-    # Step 4: push application in Docker image to OCIR 
+    # Step 5: push application in Docker image to OCIR 
     - internal/docker-push:
             entrypoint: ./promotion
             cmd: 0.0.0.0 8080
-            env: "DB_USER=${DB_USER} DB_PASSWORD=${DB_PASSWORD} DB_HOST=${DB_HOST} DB_SERVICE=${DB_SERVICE}"
+            env: "DB_USER=${DB_USER} DB_PASSWORD=${DB_PASSWORD} DB_SERVICE=${DB_SERVICE}"
             working-dir: $WERCKER_ROOT
             tag: $WERCKER_GIT_COMMIT
             ports: "8080"
@@ -308,7 +304,7 @@ kubernetes-bootcamp   1/1     1            1           19s
 ## Acknowledgements
 
 - **Author** - Valentin Leonard Tabacaru
-- **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
+- **Last Updated By/Date** - Minqiao Wang, DB Product Management, June 2020
 
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
 

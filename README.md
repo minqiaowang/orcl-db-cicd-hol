@@ -17,7 +17,7 @@ Ideally, most of the CI/CD chain (workflow or pipeline) is automated. Organizati
 
 ## Access the Labs Using Our Web Interface
 
-**[Click here](https://vltabacaru.github.io/orcl-db-cicd-hol/workshops/cicd-complete/?lab=introduction)** to use our easy to navigate HTML format.
+**[Click here](https://minqiaowang.github.io/orcl-db-cicd-hol/workshops/cicd-complete/?lab=introduction)** to use our easy to navigate HTML format.
 
 ## Access the Labs on the Repo
 
@@ -27,7 +27,7 @@ Alternatively, you can follow the labs on this repo :
 - [Oracle Cloud Infrastructure (OCI)](./lab01/content.md)
 - [GitHub Code Repository](./lab02/content.md)
 - [Oracle Wercker CI Service](./lab03/content.md)
-- [Oracle Database for Python](./lab04/content.md)
+- [Oracle Autonomous Database for Python](./lab04/content.md)
 - [Push Docker Image to Registry (OCIR)](./lab05/content.md)
 - [Deploy Python App on Container Cluster (OKE)](./lab06/content.md)
 - [Oracle Database Changes in CI/CD Workflow](./lab07/content.md)

@@ -14,7 +14,7 @@ Open [https://app.wercker.com](https://app.wercker.com) and login with your GitH
 
 Click the **+** sign next to profile icon 👤 on upper right corner, and **Add Application**.
 
-- Select SCM: GutHub
+- Select SCM: GitHub
 - Select Repository: [Your Username]/orcl-ws-cicd
 - Setup SSH key: wercker will check out the code without using an SSH key
 
@@ -182,7 +182,7 @@ pip install -U webtest
 pip freeze > requirements.pip
 ````
 
-Now we can add some unit tests for the web service in test_promotion.py. This is the result:
+Now we can add some unit tests for the web service in `test_promotion.py`. This is the result:
 
 ````
 """
@@ -272,7 +272,7 @@ Now it fails again, with the error:
 E       AssertionError: assert 1200 == '1200'
 ````
 
-Our web application returns string values now. In Python, when you compare an integer with a string, they don't match. We need to fix the unit tests in test_promotion.py.
+Our web application returns string values now. In Python, when you compare an integer with a string, they don't match. We need to fix the unit tests in `test_promotion.py`.
 
 ````
     def test_addition(self):
@@ -350,7 +350,7 @@ Use the web browser on your laptop to open [http://localhost:8080/addition/1000/
 ## Acknowledgements
 
 - **Author** - Valentin Leonard Tabacaru
-- **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
+- **Last Updated By/Date** - Minqiao Wang, DB Product Management, June 2020
 
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
 

@@ -33,7 +33,7 @@ The entire workflow, and all pipelines are fully automated. This automation auto
 - **Lab 1 : Oracle Cloud Infrastructure (OCI)**
 - **Lab 2 : GitHub Code Repository**
 - **Lab 3 : Oracle Wercker CI Service**
-- **Lab 4 : Oracle Database for Python**
+- **Lab 4 : Oracle ATP for Python**
 - **Lab 5 : Push Docker Image to Registry (OCIR)**
 - **Lab 6 : Deploy Python App on Container Cluster (OKE)**
 - **Lab 7 : Oracle Database Changes in CI/CD Workflow**
@@ -50,7 +50,7 @@ The entire workflow, and all pipelines are fully automated. This automation auto
 ## Acknowledgements
 
 - **Author** - Valentin Leonard Tabacaru
-- **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
+- **Last Updated By/Date** - Minqiao Wang, DB Product Management, May 2020
 
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
 
