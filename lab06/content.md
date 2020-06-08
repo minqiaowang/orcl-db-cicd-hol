@@ -128,7 +128,7 @@ Verify on Wercker console, under Runs, the complete workflow build + deploy is s
 From the command line, check if the deployment was successful.
 
 ````
-kubectl get deployments
+$ kubectl get deployments
 NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
 kubernetes-bootcamp   1/1     1            1           11m
 orcl-ws-app           1/1     1            1           3m34s

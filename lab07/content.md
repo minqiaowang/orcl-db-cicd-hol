@@ -10,7 +10,7 @@ There are two methods to capture and track database changes:
 
 2. Migration based (manual) — Change script created by developer containing changes to apply to the database, in a certain order. The quality of script depends on SQL skills of the application developer.
 
-The tool we use to track, version, and deploy database schema changes is [Liquibase](https://www.liquibase.org/). Liquibase supports a broad range of databases, including Oracle Database. We will use migration based method, because Liquibase is not great at capturing existing changes in an Oracle Database.
+The tool we use to track, version, and deploy database schema changes is [Liquibase](https://www.liquibase.org/). Liquibase supports a broad range of databases, including Oracle Database and ATP. We will use migration based method, because Liquibase is not great at capturing existing changes in an Oracle Database.
 
 ## Step 1: Install Liquibase
 
@@ -139,11 +139,10 @@ Exit SQL*Plus.
 exit;
 ````
 
-Work as **opc** user. Navigate to the instant client directory where we unzip the wallet files. Edit the `ojdbc.properties` file
+Exit from **oracle** user and work as **opc** user. Edit the `ojdbc.properties` file in the instant client directory where the wallet file unzipped.
 
 ```
-cd /usr/lib/oracle/18.5/client64/lib/network/admin
-sudo vi ojdbc.properties
+sudo vi /usr/lib/oracle/18.5/client64/lib/network/admin/ojdbc.properties
 ```
 
   The file look like the following:
@@ -154,7 +153,7 @@ sudo vi ojdbc.properties
 
 ```
 # Connection property while using Oracle wallets.
-#oracle.net.wallet_location=(SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=${TNS_ADMIN})))
+# oracle.net.wallet_location=(SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=${TNS_ADMIN})))
 # FOLLOW THESE STEPS FOR USING JKS
 # (1) Uncomment the following properties to use JKS.
 # (2) Comment out the oracle.net.wallet_location property above
@@ -170,7 +169,7 @@ Sudo to the **oracle** user, and cd to the `liquibase_test` folder.
 
 ```
 sudo su - oracle
-cd /orcl-ws-cicd/liquibase_test
+cd orcl-ws-cicd/liquibase_test
 ```
 
 Create a properties file to store your database connection information.
@@ -179,7 +178,7 @@ Create a properties file to store your database connection information.
 gedit cicd-user.properties
 ````
 
-Write the following lines, and save the file before closing.
+Write the following lines, change the ATP connection alias with your own, and save the file before closing.
 
 ````
 driver : oracle.jdbc.OracleDriver
@@ -674,7 +673,7 @@ END experience;
 --rollback drop function experience;
 ````
 
-Now we create the generic Liquibase properties file.
+Now we create the generic Liquibase properties file, change the ATP connection alias to your own.
 
 ````
 gedit liquibase.properties
@@ -757,7 +756,7 @@ liquibase update
 Once finished, check the results.
 
 ````
-sqlplus hr/WelCom3#2020_@vltatp_tp @query_log
+sqlplus hr/WelCom3#2020_@[Your Initials]ATP_TP @query_log
 
 OBJECT_NAME		       OBJECT_TYPE
 ------------------------------ -----------------------
