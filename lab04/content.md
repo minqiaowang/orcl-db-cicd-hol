@@ -2,18 +2,15 @@
 
 ## Introduction
 
-Our application data in stored in an Oracle ATP, that runs as an Autonomous Database Cloud Service on the OCI.
+Our application data is stored in an Oracle ATP, that runs as an Autonomous Database Cloud Service on the OCI.
 
 We want our Python web micro service to connect to our ATP, retrieve information about the employees in Human Resources (HR) sample schema, and calculate a promotion or a salary increase.
 
 ## Step 1: Download the ATP Client Credentials
 
-Connect to your Compute Instance with Remote Desktop. Open a browser and connect to the OCI. Click on hamburger menu ≡, then **Autonomous Transaction Processing** under Databases. Click **[Your Initials]ATP** for details. Click **Database Connection** and Click **Download Wallet**.
-
-Password: WelCom3#2020_
+Connect to your Compute Instance with Remote Desktop. Open a browser and connect to the OCI console. Click on hamburger menu ≡, then **Autonomous Transaction Processing** under Databases. Make sure you choose the correct Region and Compartment. Click **[Your Initials]ATP** for details. Click **Database Connection** and Click **Download Wallet**. You need to create a password for the wallet. For example: `WelCom3#2020_`
 
 Click **Download** and **Save File**.
-
 
 
 Back to the terminal connecting the VM. You can verify that a zip file has been downloaded in the directory.
@@ -23,9 +20,7 @@ $ ls /home/oracle/Downloads
 Wallet_[Your Initials]ATP.zip
 ````
 
-A version of 18.5 Oracle instant client has already been installed in this VM. 
-
-Exit to the **opc** user. Unzip the file to the directory of the oracle instant client.
+A version of 18.5 Oracle instant client has already been installed in this VM. Now you need to exit the **oracle** user and work as the **opc** user. Unzip the file to the directory of the oracle instant client.
 
 ````
 $ sudo unzip -o -d /usr/lib/oracle/18.5/client64/lib/network/admin/ /home/oracle/Downloads/Wallet_[Your Initials]ATP.zip 
@@ -60,7 +55,7 @@ SQL>
 
 ## Step 2: Prepare Sample Schema and Data
 
-In the SQLPLUS, connect as **admin** user, create the **HR** user.
+In the SQLPLUS, connect to **admin** user as previous step, create the **HR** user.
 
 ````
 CREATE USER hr IDENTIFIED BY WelCom3#2020_;
@@ -69,7 +64,7 @@ GRANT DWROLE TO hr;
 GRANT UNLIMITED TABLESPACE TO hr;
 ````
 
-Create the Cloud Object Storage credential. We will use the pre-authenticated URI to import data, but still need to supply a credential parameter. However, credentials for a pre-authenticated URL are ignored (and the supplied credentials do not need to be valid). So don't worry about the username and password parameter values to create the credential. 
+Create the Cloud Object Storage credential. We will use the pre-authenticated URI to import the sample data, but it's still need to supply a credential parameter. However, credentials for a pre-authenticated URL are ignored (and the supplied credentials do not need to be valid). So don't worry about the username and password parameter values to create the credential. 
 
 ````
 connect hr/WelCom3#2020_@[Your Initials]ATP_TP;
@@ -162,7 +157,7 @@ Finally, add the connection code to the '\_\_main__' section.
     connection.close()
 ````
 
-Just a quick check, your promotion.py should look like this:
+Just a quick check, your promotion.py should look like this, make sure the value of DBSERV is changed to your own ATP alias. 
 
 ````
 """
@@ -216,7 +211,7 @@ Verify build is successful.
 
 
 
-## Step 4: Test Database Connection
+## Step 4: Test ATP Connection
 
 On our development environment, test the application
 
@@ -227,9 +222,9 @@ Listening on http://0.0.0.0:8080/
 Hit Ctrl-C to quit.
 ````
 
-Use the web browser on your laptop to open [http://localhost:8080/conn](http://localhost:8080/conn). The response is '19.5.0.0.0'. Your Python web micro service application is connected to your Oracle Database. Press Ctrl-C to stop the application.
+Use the web browser on your laptop to open [http://localhost:8080/conn](http://localhost:8080/conn). The response is '19.5.0.0.0'. Your Python web micro service application is connected to your ATP. Press Ctrl-C to stop the application.
 
-Edit `test_promotion.py`, and add a unit test for database connection. This is how it has to be:
+Edit `test_promotion.py`, and add a unit test for ATP connection. This is how it has to be, make sure the value of DBSERV is changed to your own ATP alias.
 
 ````
 """
@@ -293,16 +288,16 @@ git push
 
 ## Step 5: Oracle Instant Client on Docker Container
 
-We need copy the ATP credential file to the git repository
+We have [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client.html) installed on the development machine, but not on the build environment. And we need the ATP credential file to the instant client. Remember, our development environment is the Compute Instance on OCI with **Oracle Linux Server 7.7**, based on Cloud Developer Image. Our build, and future deployment environment, is a Docker image with **Debian GNU/Linux 10 (buster)** with Python 3, we get from Docker Hub, called **python:3.7**.
+
+First, we need copy the ATP credential file to the git repository
 
 ```
 $ mkdir wallet
 $ cp ~/Downloads/Wallet_[Your Initials]ATP.zip ./wallet/
 ```
 
-We have [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client.html) installed on the development machine, but not on the build environment. And we need copy the ATP credential file to the instant client. Remember, our development environment is the Compute Instance on OCI with **Oracle Linux Server 7.7**, based on Cloud Developer Image. Our build, and future deployment environment, is a Docker image with **Debian GNU/Linux 10 (buster)** with Python 3, we get from Docker Hub, called **python:3.7**.
-
-We have to add in **wercker.yml** two new Steps to prepare our build and future deployment environment with Oracle Instant Client and the credential file for ATP. The new Steps has to be executed before the automated tests:
+We have to add in **wercker.yml** two new steps to prepare our build and future deployment environment with Oracle Instant Client and prepare the credential file for ATP. The new steps has to be executed before the automated tests, make sure change the wallet file name to your own.
 
 ````
 build:
@@ -327,9 +322,9 @@ build:
             wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-basiclite-19.6.0.0.0-1.x86_64.rpm
             alien -i oracle-instantclient19.6-basiclite-19.6.0.0.0-1.x86_64.rpm
             export LD_LIBRARY_PATH=/usr/lib/oracle/19.6/client64/lib:$LD_LIBRARY_PATH
-    # Step 3: copy ATP credential file
+    # Step 3: unzip and copy ATP credential file
     - script:
-        name: copy credential file
+        name: unzip and copy credential file
         code: |
             unzip -o -d /usr/lib/oracle/19.6/client64/lib/network/admin/ ./wallet/Wallet_[Your Initials]ATP.zip            
     # Step 4: run linter and tests
@@ -341,7 +336,7 @@ build:
             pytest -v --cov=promotion
 ````
 
-The step 2 adds a new package repository, installs two required packages, Oracle Instant Client 19.6, sets `LD_LIBRARY_PATH` environment variable. The step 3 unzip the ATP credential file to the instant client directory.
+The step 2 adds a new package repository, installs two required packages, Oracle Instant Client 19.6, sets `LD_LIBRARY_PATH` environment variable. The step 3 unzip and copy the ATP credential file to the instant client directory.
 
 Commit and push the changes.
 
@@ -482,13 +477,13 @@ Listening on http://0.0.0.0:8080/
 Hit Ctrl-C to quit.
 ````
 
-In your browser open `[http://localhost:8080/salary_increase/8](http://localhost:8080/salary_increase/8)`. It simulates a salary increase with 8% for all employees in our HR schema. Now open `[http://localhost:8080/add_commission/.15](http://localhost:8080/add_commission/.15)`. This web service simulates adding 15% to the commission for all employees. 
+In your browser open [`http://localhost:8080/salary_increase/8`](http://localhost:8080/salary_increase/8). It simulates a salary increase with 8% for all employees in our HR schema. Now open [`http://localhost:8080/add_commission/.15`](http://localhost:8080/add_commission/.15). This web service simulates adding 15% to the commission for all employees. 
 
 Hit Ctrl-C to close the application.
 
 In this lab, we were able to:
 
-- Connect our Python microservice to Oracle Database
+- Connect our Python microservice to Oracle Autonomous Database
 - Create unit test for database connection per CI/CD requirements
 - Install Oracle Instant Client on deployment environment
 - Enhance our HR application with new features

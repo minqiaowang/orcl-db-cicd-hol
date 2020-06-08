@@ -209,6 +209,7 @@ gedit promotion.py
 Write the following code:
 
 ````
+<copy>
 """
 Simple Python application to show CI/CD capabilities.
 """
@@ -218,6 +219,8 @@ def addition(salary, amount):
 
 def increment(salary, percentage):
     return salary * (1 + percentage/100)
+
+</copy>
 ````
 
 Commit changes to central repository.
