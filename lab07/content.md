@@ -145,7 +145,7 @@ Exit from **oracle** user and work as **opc** user. Edit the `ojdbc.properties` 
 sudo vi /usr/lib/oracle/18.5/client64/lib/network/admin/ojdbc.properties
 ```
 
-  The file look like the following:
+  Modify the file look like the following:
 
 - Comment out the `oracle.net.wallet_location` line.
 - Set `javax.net.ssl.trustStorePassword` to the wallet password when you set during download the credential file.
