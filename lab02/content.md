@@ -15,9 +15,9 @@ Get the Public IP address of the Compute Instance from Oracle Cloud console, and
 Use id_rsa Private Key to connect to this Compute Public IP address. This is the development machine, and it will be used for the duration of this workshop.
 
 This is the SSH connection command for Mac/Linux. As may notice, the SSH command creates a port forwarding tunnel on port 3389. 
-
+````
 ssh -C -i id_rsa -L 3389:localhost:3389 opc@[Compute Public IP]
-
+````
 On Windows machines, run Putty, and make sure you include the same port forward for 3389.
 
 As **opc** user, create a script using vim editor.
